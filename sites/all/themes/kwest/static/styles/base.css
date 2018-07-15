@@ -1,0 +1,32 @@
+/*
+ * Base styles
+ */
+html {overflow-y: scroll; height: 100%}
+body {overflow: hidden; position: relative; min-height: 100%; background: #000; color: #000; font: 300 14px/1.571 /* 22px */ 'Source Sans Pro', 'Arial', 'Helvetica', sans-serif}
+body * {-moz-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; list-style: none}
+
+a {color: inherit; text-decoration: none}
+
+/* Disable scrollbar and scrolling */
+.clip {overflow: hidden}
+
+/* Make container extend to full height, even when containing floated elements. */
+.clear:after {content: ''; clear: both; display: block}
+
+
+ h1,  h2,  h3,  h4,  h5,  h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {margin-bottom: 1em; color: inherit; font-family: 'Museo', 'Georgia', serif; font-weight: 400; text-transform: uppercase; line-height: 1}
+
+
+h1, .h1 {font-size: 72px}
+h2, .h2 {font-size: 38px}
+h3, .h3 {margin-bottom: 0.75em; font-size: 18px}
+
+.viewport-320 h1, .viewport-320 .h1 {font-size: 28px}
+.viewport-480 h1, .viewport-480 .h1 {font-size: 48px}
+
+.viewport-320 h2, .viewport-320 .h2 {font-size: 24px}
+.viewport-480 h2, .viewport-480 .h2 {font-size: 28px}
+
+
+*+h2, *+.h2 {margin-top: 1em}

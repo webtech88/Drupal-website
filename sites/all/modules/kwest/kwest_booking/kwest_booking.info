@@ -1,0 +1,7 @@
+name = Booking
+description = Provides a block with "Book now" form
+package = K-West
+version = 7.x-1.0
+core = 7.x
+dependencies[] = kwest
+configure = admin/config/kwest/booking

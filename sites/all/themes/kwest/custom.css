@@ -1,0 +1,186 @@
+.blog-category {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.node-blog-entry {
+  margin-bottom: 25px;
+}
+
+.blog-category .views-row {
+  display: inline-block;
+}
+
+.blog-category .views-row:after {
+  content: "-";
+}
+
+.blog-category .views-row-last:after {
+  content: "";
+}
+
+.blog-category .views-row-first:before {
+  content: "-";
+}
+
+.blog-category .views-row a {
+  display: inline-block;
+}
+
+.blog-category .views-row a:hover {
+  text-decoration: underline;
+}
+
+.blog-category .view-content a {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #936421;
+}
+
+.blog-category .blog-post .view-content a {
+  color: #936421;
+}
+
+.blog-category .view-content a:hover {
+  text-decoration: underline;
+}
+
+.container.padding-big {
+  padding: 45px 60px 60px 60px;
+}
+
+/* Room attributes */
+.room-attrs { margin:0 60px; }
+
+.room-attrs h3 {
+  border: solid 1px white;
+  background: white;
+  border-bottom: solid 1px #e0e0e0;
+  padding-left: 0;
+}
+.room-attrs h3 a {
+  font-family: 'Lato Light';
+  font-size: 15px !important;
+  color: #a9a9a9;
+  text-transform: uppercase;
+  padding-left: 20px;
+}
+.room-attrs .ui-accordion-content {
+  border: none;
+  color:#000;
+  margin-top: 0px;
+}
+.room-attrs .views-row {
+  font-family: 'Lato Light';
+  /* font-size: 14px; */
+  font-size: 13px;
+ 
+  width: 160px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.room-attrs .views-row.icon-group-General {
+  width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.room-attrs .views-row .views-field {
+  width: 85px;
+  height: 50px;
+
+}
+
+.room-attrs .views-row.icon-group-Media,
+.room-attrs .views-row.icon-group-Amenities,
+.room-attrs .views-row.icon-group-Awards, 
+.room-attrs .views-row.icon-group-Media .views-field,
+.room-attrs .views-row.icon-group-Amenities .views-field,
+.room-attrs .views-row.icon-group-Awards .views-field { float:left; }
+
+
+.room-attrs .views-row .views-field-field-icon { width: 60px;  }
+.room-attrs .views-row.icon-group-General .views-field {
+  width: 150px;
+  height: 50px;
+}
+.room-attrs .views-row.icon-group-General .views-field-field-icon { width:85px; }
+.room-attrs .views-row.icon-group-General .views-field-field-icon-short-text { 
+	width:100px; 
+	padding-right:20px; /* Added CN 21/3/16 to make long text into two lines */
+	
+}
+.room-attrs .views-field-field-icon-label .field-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-transform: uppercase;
+}
+.room-attrs .views-field-field-icon-short-text .field-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.room-attrs .ui-icon {
+  left: 0 !important;
+}
+.room-attrs .ui-icon.ui-icon-triangle-1-e {
+  background-position: -64px 0;
+}
+.room-attrs .ui-icon.ui-icon-triangle-1-s {
+  background-position: 0 0;
+}
+
+
+/*
+ * Added CN 14/3/16 / Updated 21/3/16 to incorporate Rooms layout
+ */
+
+/*** Uncomment the four lines which include '.icon-label-Rooms' once logic has been done ***/
+
+.room-attrs .icon-label-Rooms .views-field-field-icon-label,	
+.room-attrs .icon-label-Occupancy .views-field-field-icon-label,
+.room-attrs .icon-label-Suitability .views-field-field-icon-label { display:none; }
+
+.room-attrs .icon-label-Rooms.icon-index-1 .views-field-field-icon-label,
+.room-attrs .icon-label-Occupancy.icon-index-1 .views-field-field-icon-label,
+.room-attrs .icon-label-Suitability.icon-index-1 .views-field-field-icon-label { 
+	display:block; 
+	clear:both;
+}
+
+
+	
+
+@media (min-width: 480px) { 
+	
+	.room-attrs .icon-group-General { clear:both; }
+	
+	.room-attrs .icon-group-General:after {
+    	content:"";
+    	display:block;
+    	clear:both;
+	}
+	
+	.room-attrs .icon-group-General .views-field-field-icon,
+	.room-attrs .icon-group-General .views-field-field-icon-short-text { float:left; }
+	
+}
+
+@media (min-width: 1024px) { 
+	.room-attrs .icon-group-General.icon-index-1 .views-field-field-icon-label,
+	.room-attrs .icon-group-General.icon-label-Rooms,
+	.room-attrs .icon-group-General.icon-label-Occupancy,
+	.room-attrs .icon-group-General.icon-label-Suitability { 
+		float:left;
+		clear:none;
+	}
+	
+	.room-attrs .icon-label-Rooms.icon-index-3,
+	.room-attrs .icon-label-Occupancy.icon-index-3,
+	.room-attrs .icon-label-Suitability.icon-index-3 {
+		margin-left:150px;
+	}
+	
+}
+.ui-accordion-header a {outline: none;}

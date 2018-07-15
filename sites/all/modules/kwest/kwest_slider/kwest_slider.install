@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function kwest_slider_uninstall() {
+	$vocab = taxonomy_vocabulary_machine_name_load('vocab_kwesy_slider');
+	taxonomy_vocabulary_delete($vocab->vid);
+}
+
+/**
+ * Implements hook_install().
+ */
+function kwest_slider_install() {
+	$new_vocab = (object) array(
+		'name' => t('Slider Placement'),
+		'description' => t('This vocabulary create for Slider placements'),
+		'machine_name' => 'vocab_kwesy_slider',
+	);  
+	taxonomy_vocabulary_save($new_vocab);
+}

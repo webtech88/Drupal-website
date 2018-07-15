@@ -1,0 +1,101 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Restaurant<br>&amp; bar{% endblock %}
+
+{% block content %}
+    <div class="wysiwyg">
+        <h2>Kanteen restaurant</h2>
+        <hr class="short thick">
+        <p>Featuring luxurious leather seating in rich blues and reds, against dark wood, stainless steel and glass, Kanteen is a stylish restaurant for contemporary dining. Chef Eduart Berisha heads up the team and offers a tempting menu full of creative modern dishes. Art in Kanteen We have joined forces with Laura McNamara Ltd to re-invigorate Kanteen with a fresh supply of original artwork, available for sale, every 6 months. The current exhibition features work by Julian Kimmings, Zoot and Sola. View our Restaurant menu For more information or to book a table, please call <a href="#">020 8008 6600</a> or email <a href="#">bookit@k-west.co.uk</a></p>
+        <p>
+            <a href="#" class="button icon-right icon-arrow-right">Check out our menu</a>
+        </p>
+    </div>
+{% endblock %}
+
+{% block gallery-content %}
+    <div class="grid rtl middle">
+        <div class="v320-hide v480-hide v720-1-of-4 v1280-1-of-5">
+            {{ utils.thumbnail(198, 198, 'sidebar-image triangle-color-inverted') }}
+        </div>
+        <div class="v320-1 v1280-4-of-5">
+            <div class="grid middle">
+                <div class="v320-1 v720-1-of-2">
+                    <div class="grid middle">
+                        <div class="v320-1 v480-1-of-2">
+                            {{ utils.thumbnail(198, 198, 'tile-image-left triangle-color-inverted') }}
+                        </div>
+                        <div class="v320-1 v480-1-of-2 text-center">
+                            <div class="tile container inverted">
+                                <div>
+                                    <h3 class="icon-block icon-chef">Our Chef</h3>
+                                    <p>Fusce in enim vel ligula ornare tristique non dui gravida.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="v320-1 v720-1-of-2">
+                    <div class="grid middle v480-rtl">
+                        <div class="v320-1 v480-1-of-2">
+                            {{ utils.thumbnail(198, 198, 'tile-image-left triangle-color-inverted') }}
+                        </div>
+                        <div class="v320-1 v480-1-of-2 text-center">
+                            <div class="tile container inverted">
+                                <div>
+                                    <h3 class="icon-block icon-cuisine">Cuisine</h3>
+                                    <p>Fusce in enim vel ligula ornare tristique non dui gravida.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+
+{% block sidebar-content %}
+    <form class="book-form-small">
+        <div class="grid padding small">
+            <div class="v320-1">
+                <h3 class="icon-block icon-calendar">Make a booking</h3>
+                <p>Kanteen Restaurant Reservations</p>
+            </div>
+            <div class="v320-1 v480-1-of-2 v720-1">
+                <div class="form-field textfield alt">
+                    <p>
+                        <label for="book-date" class="placeholder">Date</label>
+                        <input type="text" id="book-date">
+                    </p>
+                </div>
+            </div>
+            <div class="v320-1 v480-1-of-2 v720-1">
+                <div class="form-field textfield alt">
+                    <p>
+                        <label for="book-time" class="placeholder">Time</label>
+                        <input type="text" id="book-time">
+                    </p>
+                </div>
+            </div>
+            <div class="v320-1 v480-1-of-2 v720-1">
+                <div class="form-field textfield alt">
+                    <p>
+                        <label for="book-people" class="placeholder">No. of people</label>
+                        <input type="text" id="book-people">
+                    </p>
+                </div>
+            </div>
+            <div class="v320-1 v480-1-of-2 v720-1">
+                <div class="form-field submit">
+                    <p>
+                        <button type="submit" class="button alt-text-color v320-1 icon-arrow-right icon-right">Find a table</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

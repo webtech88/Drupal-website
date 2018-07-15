@@ -1,0 +1,33 @@
+.page-header {position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; width: 180px; padding-top: 180px; padding-bottom: 70px; background: #222; color: #a7a7a7}
+.page-header .logo {position: absolute; top: 0; left: 0; width: 100%; height: 0; padding-bottom: 100%; background: #000}
+.page-header .logo img {position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 106px; margin: auto}
+
+.page-header>.button {position: absolute; top: 0; right: 0; display: none; width: 80px; height: 90px; background: #222; line-height: 90px}
+.page-header>.button:before {margin: 0; color: #bea178; font-size: 22px; line-height: 90px}
+.page-header .book-form-toggle.button {right: 80px}
+
+.viewport-960 .page-header .book-form-toggle.button {display: none}
+
+.mobile .page-header {position: static; width: 100%; height: 90px; padding: 0}
+.mobile .page-header .logo {width: 160px; height: 90px; padding-bottom: 0}
+.mobile .page-header .logo img {width: 80px}
+.mobile .page-header .button {display: block}
+
+.main-menu {height: 100%}
+.main-menu .scrollbar-wrapper {height: 100%}
+.main-menu .scrollbar-clip {position: relative; height: 100%}
+.main-menu .scrollable {height: 100%}
+.main-menu .scrollbar-offset {position: absolute; top: 0; right: 0; bottom: 0; left: 0}
+.main-menu ul {padding: 60px 40px}
+.main-menu ul>li>a {position: relative; display: block; padding: 10px 0; text-transform: uppercase; line-height: 20px; -webkit-transition: padding 0.25s ease, color 0.25s ease; transition: padding 0.25s ease, color 0.25s ease}
+.main-menu ul>li+li>a:before {content: ''; position: absolute; top: 0; left: 0; width: 25px; height: 1px; background: #4e4e4e}
+.main-menu ul>li>a:after {content: ''; position: absolute; top: 50%; left: -20px; right: -20px; height: 1px; border: 10px solid #4e4e4e; border-width: 0; -webkit-transition: border 0.25s ease; transition: border 0.25s ease}
+
+.main-menu ul>li>a.active,
+.main-menu ul>li>a:hover {padding-left: 5px; color: #fff}
+.main-menu ul>li>a.active:after,
+.main-menu ul>li>a:hover:after {border-width: 0 10px}
+
+.mobile .main-menu {display: none; position: absolute; top: 91px; bottom: 0; right: -160px; z-index: 100; width: 160px; height: auto; background: inherit; -webkit-transform: translate3d(0, 0, 0); -webkit-transition: right 0.25s ease; transition: right 0.25s ease}
+.mobile .main-menu ul {padding: 25px}
+.mobile.menu-mobile-active .main-menu {right: 0}

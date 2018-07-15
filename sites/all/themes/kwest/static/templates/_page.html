@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <title>K West</title>
+
+        <link rel="stylesheet" href="styles/normalize2.css">
+        <link rel="stylesheet" href="styles/fonts.css">
+        <link rel="stylesheet" href="styles/weather-icons.css">
+        <link rel="stylesheet" href="styles/analogclock.css">
+        <link rel="stylesheet" href="styles/icons.css">
+        <link rel="stylesheet" href="styles/base.css">
+        <link rel="stylesheet" href="styles/columns.css">
+        <link rel="stylesheet" href="styles/forms.css">
+        <link rel="stylesheet" href="styles/footer.css">
+        <link rel="stylesheet" href="styles/grid.css">
+        <link rel="stylesheet" href="styles/header.css">
+        <link rel="stylesheet" href="styles/wysiwyg.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <!--[if lte IE 7]>
+            <link rel="stylesheet" href="styles/ie7.css">
+        <![endif]-->
+        <!--[if lt IE 9]>
+            <script src="scripts/libs/html5shiv.js"></script>
+            <script src="scripts/libs/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <script>document.body.className += ' js';</script>
+
+        <!--[if lte IE 7]>
+            <div id="upgrade">
+                <p class="logo"><img src="images/logo.png"></p>
+                <p>This website is not optimized for Internet Explorer 7 and older.</p>
+                <p>Please change or update your browser.</p>
+            </div>
+        <![endif]-->
+
+        {% include '_header.html' %}
+        {% include '_book_form.html' %}
+
+        <main>
+            {% block page-content %}{% endblock %}
+        </main>
+
+        {% include '_footer.html' %}
+
+        <script src="scripts/_all.js"></script>
+    </body>
+</html>

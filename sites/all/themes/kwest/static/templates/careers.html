@@ -1,0 +1,41 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_macros_blog.html' as blog %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Careers{% endblock %}
+
+{% block page-content-classes %}{% endblock %}
+
+{% block content %}
+    <div class="clip">
+        <div class="grid padding big">
+            <div class="v320-1">
+                <div class="wysiwyg">
+                    <h2>avaliable careers</h2>
+                    <hr class="short thick">
+                    <p>Want to join our team? If you are fun, engaging, genuinely enjoy working with people, have a “can do” attitude, are passionate about service and developing your career – send your CV to <a href="#">careers@k-west.co.uk</a> with a cover letter telling us why you want to work with us!</p>
+                </div>
+            </div>
+            <div class="v320-1">
+                {{ blog.teaser(false, true) }}
+                {{ blog.teaser(false, true) }}
+                {{ blog.teaser(false, false) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid">
+        {{ utils.testimonial_intro() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+    </div>
+{% endblock %}
+
+{% block sidebar-image %}
+    {{ utils.sidebar_image() }}
+{% endblock %}

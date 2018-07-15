@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function application_install() {
+
+}
+
+/*
+ * Enable module.
+ */
+function application_update_7001() {
+  db_update('block')
+    ->fields(array('status' => 0))
+    ->condition('theme', 'kwest')
+    ->condition(db_or()
+      ->condition('delta', 'restaurant_book_form')
+    )
+    ->execute();
+}
+
+function application_update_7002() {
+  $module_list = array(
+    'application',
+    'rooms',
+    'siteblog',
+    'production',
+    'devdata',
+  );
+  module_enable($module_list);
+  module_list(TRUE, FALSE);
+
+  application_api_features_revert(application_features_list());
+  drupal_flush_all_caches();
+
+  variable_set('production_hostname', 'k-west.co.uk');
+}
+
+/*
+ * Enable block.
+ */
+function application_update_7003() {
+  db_update('block')
+    ->fields(array('status' => 1, 'region' => 'sidebar'))
+    ->condition('delta', 'restaurant_book_form')
+    ->execute();
+
+  application_api_features_revert(application_features_list());
+  drupal_flush_all_caches();
+}
+
+/*
+ * Disable block.
+ */
+function application_update_7004() {
+  db_update('block')
+    ->fields(array('status' => 0))
+    ->condition('theme', 'kwest')
+    ->condition(db_or()
+      ->condition('delta', 'restaurant_book_form')
+    )
+    ->execute();
+}
+
+/**
+ * 2015-08-06.
+ */
+function application_update_7005() {
+  variable_set('google_tagmanager_id', 'GTM-PHQ292');
+}
+
+/**
+ * 2016-03-03.
+ */
+function application_update_7006() {
+  application_api_features_revert(application_features_list());
+  drupal_flush_all_caches();
+}
+
+/**
+ * Disable and uninstall devdata module.
+ */
+function application_update_7007() {
+  if( module_exists('devdata')) {
+    module_disable(array('devdata'));
+    drupal_uninstall_modules(array('devdata'));
+  }
+  drupal_flush_all_caches();
+}
+
+/**
+ * Enable transliteration and imagecache_token module.
+ */
+function application_update_7008() {
+  module_enable(array('transliteration', 'imagecache_token'),FALSE);
+  drupal_flush_all_caches();
+}

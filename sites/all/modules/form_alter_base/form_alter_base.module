@@ -1,0 +1,21 @@
+<?php
+/**
+ * Implementation of hook_form_alter.
+ * Searches for classes extending FormAlterBase,
+ * creates an instance of each of them
+ * and invokes process() on these instances.
+ */
+function form_alter_base_form_alter(&$form, &$form_state, $form_id) {
+	static $form_alter_classes = null;
+	if (!isset($form_alter_classes)) {
+		$form_alter_classes = array();
+		foreach (get_declared_classes() as $class)
+			if (is_subclass_of($class, 'FormAlterBase'))
+				$form_alter_classes[] = $class;
+	}
+
+	foreach ($form_alter_classes as $class) {
+		$instance = new $class($form, $form_state, $form_id);
+		$instance->process();
+	}
+}

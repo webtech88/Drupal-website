@@ -1,0 +1,7 @@
+name = Popup module
+description = Provides a Popup block
+package = K-West
+version = 7.x-1.0
+core = 7.x
+dependencies[] = kwest
+configure = admin/config/kwest/popup

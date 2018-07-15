@@ -1,0 +1,134 @@
+<?php
+define('WEATHER_API_URL', 'http://api.worldweatheronline.com/premium/v1/weather.ashx');
+
+function kwest_weather_permission() {
+    return array(
+        'manage weather settings' => array(
+            'title' => t('Manage weather settings'),
+        ),
+    );
+}
+
+
+function kwest_weather_menu() {
+    return array(
+        'admin/config/kwest/weather' => array(
+            'title' => 'Weather',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_weather_admin_form'),
+            'access arguments' => array('manage weather settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+    );
+}
+
+
+function kwest_weather_admin_form() {
+    return system_settings_form(array(
+        'kwest_weather_api_key' => array(
+            '#title' => 'API Key',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_weather_api_key', ''),
+        ),
+        'kwest_weather_latitude' => array(
+            '#title' => 'Latitude',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_weather_latitude', ''),
+        ),
+        'kwest_weather_longitude' => array(
+            '#title' => 'Longitude',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_weather_longitude', ''),
+        ),
+    ));
+}
+
+
+function kwest_weather_block_info() {
+    return array(
+        'weather' => array(
+            'info' => 'Weather',
+        ),
+    );
+}
+
+
+function kwest_weather_block_view($delta='') {
+    if ($delta === 'weather') {
+        $weather = kwest_weather_get_weather();
+
+        if (empty($weather))
+            return array();
+
+        return array(
+            'subject' => 'Current weather:',
+            'content' => theme('kwest_weather', array(
+                'title' => $weather['title'],
+                'class' => $weather['class'],
+                'temperature' => $weather['temperature'],
+            )),
+        );
+    }
+    return array();
+}
+
+
+function kwest_weather_theme() {
+    return array(
+        'kwest_weather' => array(
+            'variables' => array('title' => null, 'class' => null, 'temperature' => null),
+            'template' => 'kwest-weather',
+        ),
+    );
+}
+
+
+function kwest_weather_get_weather() {
+    $weather = variable_get('kwest_weather', array());
+
+    if (!empty($weather) && !empty($weather['temperature']) && $weather['updated_at'] >= time() - 15 * 60)
+        return $weather;
+
+    $api_key = variable_get('kwest_weather_api_key', '');
+    $latitude = variable_get('kwest_weather_latitude', '');
+    $longitude = variable_get('kwest_weather_longitude', '');
+
+    if (!$api_key || !$latitude || !$longitude)
+        return $weather;
+
+    $json = file_get_contents(WEATHER_API_URL . '?' . http_build_query(array(
+        'format' => 'json',
+        'key' => $api_key,
+        'q' => $latitude . ' ' . $longitude,
+        'includeLocation' => 'no',
+        'fx' => 'no',
+    ), '', '&'));
+
+    $data = json_decode($json);
+
+    module_load_include('inc', 'kwest_weather', 'icons');
+
+    $code  = $data->data->current_condition[0]->weatherCode;
+    $icon = kwest_weather_get_icon_by_code($code);
+    $weather['title'] = $icon[0];
+    $weather['class'] = $icon[kwest_weather_is_night() ? 2 : 1];
+    $weather['temperature'] = $data->data->current_condition[0]->temp_C;
+    $weather['updated_at'] = time();
+
+    variable_set('kwest_weather', $weather);
+
+    return $weather;
+}
+
+function kwest_weather_is_night() {
+    $now = time();
+    $latitude = variable_get('kwest_weather_latitude', '');
+    $longitude = variable_get('kwest_weather_longitude', '');
+    $timezone = new DateTimeZone(date_default_timezone_get());
+    $sun_info = date_sun_info($now, $latitude, $longitude);
+
+    return $now < $sun_info['sunrise'] || $now > $sun_info['sunset'];
+}

@@ -1,0 +1,128 @@
+<?php
+function kwest_booking_permission() {
+    return array(
+        'manage booking settings' => array(
+            'title' => t('Manage booking settings'),
+        ),
+    );
+}
+
+
+function kwest_booking_menu() {
+    return array(
+        'admin/config/kwest/booking' => array(
+            'title' => 'Booking',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_booking_admin_form'),
+            'access arguments' => array('manage booking settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+    );
+}
+
+
+function kwest_booking_admin_form() {
+    return system_settings_form(array(
+        'kwest_booking_hotel_id' => array(
+            '#title' => 'Hotel ID',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_booking_hotel_id', ''),
+        ),
+        'kwest_booking_bookatable_connection_id' => array(
+            '#title' => 'Bookatable Connection ID',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_booking_bookatable_connection_id', ''),
+        ),
+    ));
+}
+
+
+function kwest_booking_block_info() {
+    return array(
+        'book_form' => array(
+            'info' => 'Book form',
+        ),
+        'restaurant_book_form' => array(
+            'info' => 'Restaurant book form',
+        ),
+    );
+}
+
+
+function kwest_booking_block_view($delta='') {
+    if ($delta === 'book_form')
+        return array(
+            'subject' => 'Book form',
+            'content' => drupal_get_form('kwest_booking_book_form'),
+        );
+    elseif ($delta === 'restaurant_book_form')
+        return array(
+            'subject' => 'Restaurant book form',
+            'content' => theme('kwest_booking_restaurant_book_form', array(
+                'connection_id' => variable_get('kwest_booking_bookatable_connection_id', '')
+            )),
+        );
+    return array();
+}
+
+
+function kwest_booking_theme() {
+    return array(
+        'kwest_booking_book_form' => array(
+            'render element' => 'form',
+            'template' => 'kwest-booking-book-form',
+        ),
+        'kwest_booking_restaurant_book_form' => array(
+            'variables' => array('connection_id' => null),
+            'template' => 'kwest-booking-restaurant-book-form',
+        ),
+    );
+}
+
+
+function kwest_booking_book_form() {
+    $today = new DateTime();
+    $tomorrow = new DateTime('tomorrow');
+    return array(
+        '#action' => 'https://booking.ihotelier.com/istay/istay.jsp',
+        '#method' => 'post',
+        '#theme' => 'kwest_booking_book_form',
+        '#attributes' => array(
+            'target' => '_blank',
+        ),
+        'DateIn' => array(
+            '#title' => 'Check in',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#attributes' => array(
+                'class' => array('datepicker'),
+            ),
+            '#default_value' => $today->format('d/m/Y'),
+        ),
+        'DateOut' => array(
+            '#title' => 'Check out',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#attributes' => array(
+                'class' => array('datepicker'),
+            ),
+            '#default_value' => $tomorrow->format('d/m/Y'),
+        ),
+        'languageId' => array(
+            '#type' => 'hidden',
+            '#value' => '11',  # English (UK)
+        ),
+        'HotelId' => array(
+            '#type' => 'hidden',
+            '#value' => variable_get('kwest_booking_hotel_id'),
+        ),
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Check availability',
+        ),
+    );
+}

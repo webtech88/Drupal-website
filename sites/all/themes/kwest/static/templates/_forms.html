@@ -1,0 +1,51 @@
+{% macro textfield(id, label) %}
+    <div class="form-field textfield alt">
+        <p>
+            {% if label %}
+                <label for="{{ id }}" class="placeholder">{{ label }}</label>
+            {% endif %}
+            <input type="text" id="{{ id }}">
+        </p>
+    </div>
+{% endmacro %}
+
+{% macro textfield_table(id, label) %}
+    <div class="form-field textfield">
+        <p class="table-layout">
+            {% if label %}
+                <span>
+                    <label for="{{ id }}">{{ label }}</label>
+                </span>
+            {% endif %}
+            <span class="wide">
+                <input type="text" id="{{ id }}">
+            </span>
+        </p>
+    </div>
+{% endmacro %}
+
+{% macro textarea(id, label) %}
+    <div class="form-field textarea">
+        <p>
+            {% if label %}
+                <label for="{{ id }}">{{ label }}</label>
+            {% endif %}
+            <span class="scrollbar-wrapper">
+                <span class="scrollbar-clip">
+                    <span class="scrollbar-offset">
+                        <textarea id="{{ id }}" class="scrollable"></textarea>
+                    </span>
+                </span>
+            </span>
+        </p>
+    </div>
+{% endmacro %}
+
+{% macro checkbox(id, label) %}
+    <div class="form-field checkbox">
+        <p>
+            <input type="checkbox" id="{{ id }}">
+            <label for="{{ id }}">{{ label }}</label>
+        </p>
+    </div>
+{% endmacro %}

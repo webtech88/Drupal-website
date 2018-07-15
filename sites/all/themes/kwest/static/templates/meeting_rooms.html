@@ -1,0 +1,59 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_macros_blog.html' as blog %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Meetings<br>&amp; Events{% endblock %}
+
+{% block page-content-classes %}{% endblock %}
+
+{% block content %}
+    <div class="wysiwyg">
+        <h2>Meeting rooms</h2>
+        <hr class="short thick">
+        <p>Suited to small and medium sized events, our contemporary meeting rooms are all naturally lit and offer optimum comfort. They also feature internet access, direct dial phone lines, air extraction and personalised service.<br>All of our function rooms are located on the Spa Level of the hotel, giving you the opportunity to be a little more creative with your meetings and events – the possibilities are as endless as your imagination!</p>
+        <p><a href="#">Click here</a> to download our Meetings & Events Brochure.<br><a href="#">Click here</a> to view our Incentives<br><a href="#">Click here</a> to view our Christmas & New Year’s Special Offers</p>
+    </div>
+
+    <figure class="image-link margin-top margin-bottom text-center">
+        {{ utils.image(672, 130) }}
+        <figcaption>
+            <h2>The Empire Room</h2>
+            <p><a href="#" class="button icon-arrow-right icon-right">Learn more</a></p>
+        </figcaption>
+    </figure>
+
+    <figure class="image-link margin-bottom text-center">
+        {{ utils.image(672, 130) }}
+        <figcaption>
+            <h2>The Empire Room</h2>
+            <p><a href="#" class="button icon-arrow-right icon-right">Learn more</a></p>
+        </figcaption>
+    </figure>
+
+    <figure class="image-link margin-bottom text-center">
+        {{ utils.image(672, 130) }}
+        <figcaption>
+            <h2>The Empire Room</h2>
+            <p><a href="#" class="button icon-arrow-right icon-right">Learn more</a></p>
+        </figcaption>
+    </figure>
+
+    <figure class="image-link margin-bottom text-center">
+        {{ utils.image(672, 130) }}
+        <figcaption>
+            <h2>The Empire Room</h2>
+            <p><a href="#" class="button icon-arrow-right icon-right">Learn more</a></p>
+        </figcaption>
+    </figure>
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    {{ utils.enjoy() }}
+{% endblock %}
+
+{% block sidebar-image %}
+    {{ utils.sidebar_image() }}
+{% endblock %}

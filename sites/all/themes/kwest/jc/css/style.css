@@ -1,0 +1,532 @@
+/*CUSTOM*/
+.dark-background .ckeditor-accordion-container > dl dt > a {
+    color: #fff;
+}
+.ckeditor-accordion-container > dl {
+    border: 0;
+}
+
+.ckeditor-accordion-container > dl dt > .ckeditor-accordion-toggle {
+    display: none;
+}
+.ckeditor-accordion-container > dl dt > a {
+    padding:10px 15px;
+    background-color: transparent;
+    border: 0;
+    color: black;
+    opacity: 1;
+}
+.ckeditor-accordion-container > dl dt.active > a {
+    background: transparent;
+}
+.ckeditor-accordion-container > dl dt > a:hover,
+.ckeditor-accordion-container > dl dt.active > a:hover {
+    background: transparent;
+}
+textarea,
+input {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+.image-link figcaption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.image-link figcaption p {
+    margin: 0;
+}
+.page-footer .trip-advisor {
+    width: 60px;
+}
+.page-footer .trip-advisor img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}
+.page-footer .footer-menu.grid.padding.big {
+    float: left;
+    margin: 0;
+}
+footer {
+    overflow: visible !important;
+}
+.form-item > .description {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    display: none;
+    background: #bea178;
+    padding: 5px 10px;
+    font-size: 16px;
+    color:#000;
+}
+.form-item > .description:after{
+    content: "d";
+    position: absolute;
+    top:0;
+    bottom:0;
+    right: 15px;
+    text-align: center;
+    font: normal 24px/1 "Icons" !important;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transition: transform 0.4s;
+    -webkit-transition: transform 0.4s;
+}
+.form-item:hover > .description{
+    display:block;
+    opacity: 1;
+    transition: opacity 0.4s;
+    -webkit-transition: opacity 0.4s;
+}
+footer form,
+.mailchimp-signup-subscribe-form {
+    position: relative;
+    float: left;
+    margin: -6px 0 0;
+}
+.mailchimp-signup-subscribe-form label {
+    display: none;
+}
+footer form .form-actions,
+.mailchimp-signup-subscribe-form .form-actions.form-wrapper {
+    float: left;
+    margin: 0 0 0 5px;
+}
+footer form input[type="submit"],
+.mailchimp-signup-subscribe-form input[type="submit"] {
+    min-width: 100px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    margin: 0;
+    padding: 0 7px;
+    background: #bea178;
+    color: #000;
+    font-size: 14px;
+    line-height: 34px;
+    text-transform: uppercase;
+}
+footer form input[type="submit"]:hover,
+.mailchimp-signup-subscribe-form input[type="submit"]:hover {
+    opacity: 0.75;
+}
+footer form .form-item{
+    margin: 0;
+}
+footer form .form-item,
+.mailchimp-signup-subscribe-form .mailchimp-newsletter-mergefields {
+    float: left;
+}
+footer form input[type="email"]{
+    height: 30px;
+    display: block;
+    padding: 6px 10px;
+    font-size: 14px;
+    line-height: 1;
+}
+footer form input[type="email"],
+.mailchimp-signup-subscribe-form  input[type="text"] {
+    width: 250px;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+}
+footer form label.error,
+.mailchimp-signup-subscribe-form label.error {
+    color: #f00;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    white-space: nowrap;
+}
+.scroll-help {
+    position: fixed;
+    bottom: 70px;
+    width: 90px;
+    height: 90px;
+    color: #fff;
+    right: 0;
+    text-align: center;
+    padding: 39px 0 0 10px;
+    overflow: hidden;
+    z-index: 20;
+}
+.scroll-help:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 180px;
+    background: #000;
+    border-radius: 79px;
+}
+.scroll-help:after {
+    content: "d";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    font: normal 24px/1 "Icons" !important;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transition: transform 0.4s;
+    -webkit-transition: transform 0.4s;
+}
+.scroll-help .scroll-top,
+.scroll-help .scroll-bottom {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 39px 0 0 5px;
+    z-index: 2;
+    transition: opacity 0.4s;
+    -webkit-transition: opacity 0.4s;
+}
+.scroll-help .scroll-top {
+    opacity: 0;
+    z-index: 1;
+}
+.scroll-help.active .scroll-top {
+    opacity: 1;
+    z-index: 2;
+}
+.scroll-help.active .scroll-bottom {
+    opacity: 0;
+    z-index: 1;
+}
+.scroll-help.active:after {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+}
+footer.page-footer {
+    padding-top: 30px;
+}
+.main-menu ul>li>a.active-trail {
+    padding-left: 5px;
+    color: #fff;
+}
+.main-menu ul>li>a.active-trail:after {
+    border-width: 0 10px;
+}
+.back-link-holder {
+    position: relative;
+    display: block;
+    padding: 25px 0 0 60px;
+    margin: 0 0 -20px;
+    width: 25%;
+    z-index: 1;
+}
+
+.back-link-holder #back-link {
+    background: #fff;
+    border: 1px solid #bea178;
+    padding: 2px 10px 0;
+    text-align: center;
+    display: block;
+    text-transform: uppercase;
+    line-height: 26px;
+}
+.back-link-holder #back-link:hover {
+    opacity: 0.75;
+}
+.back-link-holder #back-link:before {
+    content: "d";
+    font-family: "Icons" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    margin: 0 8px 0 0;
+    font-size: 12px;
+    line-height: 10px;
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+}
+.page-content {
+    background: #222;
+}
+.triangle-color-inverted a {
+    position: relative;
+}
+.page-content.dark-background {
+    background: none;
+}
+body main {
+    padding-bottom: 67px;
+}
+body.mobile main {
+    padding: 0;
+}
+div.clientside-error {
+    margin: 20px 0;
+    padding: 10px;
+    background-image: none;
+}
+.gallery .container.inverted {
+    position:relative;
+}
+div.page-content .gallery {
+    margin-bottom: 0;
+}
+.gallery .zoom-thumb {
+    width: 100% !important;
+}
+.related-offer .grid.middle {
+    background: #222;
+}
+.related-offer figure a {
+    width: 100% !important;
+    height: auto !important;
+    position: relative;
+    overflow: hidden;
+}
+.related-offer figure img {
+    position: relative;
+}
+.textfield input[type="text"].error,
+.form-textarea-wrapper textarea.error {
+    border-bottom: 1px solid #f00;
+}
+#kwest-contact-contact-form textarea {
+    resize: vertical;
+}
+.form-field input[type="checkbox"].error + label:before {
+    border-color: #f00;
+}
+textarea {
+    min-height: 200px;
+}
+.container div.messages ul {
+    margin: 0;
+}
+.ui-datepicker {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+}
+.gallery-fader.big nav {
+    top: 0;
+    display: flex;
+}
+div.gallery-fader nav button {
+    height: 100%;
+}
+a.button,
+button.button {
+    line-height: 33px;
+}
+nav.main-menu,
+div.book-form {
+    display: none;
+}
+.mobile nav.main-menu,
+.mobile div.book-form {
+    display: block;
+}
+/* instagramm feed */
+.instagram-social-feed{
+    width: 100%;
+    padding: 0 60px 60px;
+    text-align: center;
+}
+.instagram-social-feed > ul{
+    margin: 0 0 10px;
+}
+.instagram-social-feed > ul li{
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+}
+.instagram-social-feed .social-feed-link{
+    color: #3b94d9;
+}
+.instagram-social-feed .social-feed-link:hover{
+    color: #55acee;
+}
+.instagram-widget{
+    margin-top: -30px;
+    text-align: center;
+}
+/* fix icons font */
+footer .hide-text{
+    overflow: visible;
+}
+
+/* maintenance-page */
+.maintenance-page{
+    color:#fff;
+    text-align: center;
+}
+/*homepage links*/
+.home-thumbnails{
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 1450px) {
+    footer form input[type="email"],
+    .mailchimp-signup-subscribe-form input[type="text"] {
+        width: 160px;
+    }
+}
+@media (max-width: 1280px) {
+    .page-footer {
+        text-align: center;
+    }
+    .scroll-help {
+        bottom: 0;
+    }
+    .page-footer .footer-menu.grid.padding.big {
+        float: none;
+    }
+    footer form,
+    .mailchimp-signup-subscribe-form {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+        margin: 20px 0 0;
+    }
+    footer form input[type="email"],
+    .mailchimp-signup-subscribe-form input[type="text"] {
+        width: 200px;
+    }
+    .page-content {
+        margin-top: 0 !important;
+    }
+    .back-link-holder {
+        width: 30%;
+    }
+    .room-attrs .views-row.icon-group-General {
+        overflow: hidden;
+    }
+    .room-attrs .views-row.icon-group-General .views-field {
+        float: left;
+    }
+}
+@media (max-width: 960px) {
+    .related-offer .v480-hide {
+        display: none !important;
+    }
+}
+@media (max-width: 959px) {
+    .page-column.homepage-column .page-content .grid .v720-1-of-2{
+        width: 40%;
+    }
+}
+@media (max-width: 787px) {
+    .mobile .page-footer {
+        padding: 20px;
+    }
+    footer form input[type="email"],
+    .mailchimp-signup-subscribe-form input[type="text"] {
+        width: 170px;
+    }
+    .scroll-help .scroll-bottom,
+    .scroll-help .scroll-top {
+        display: none;
+    }
+    .scroll-help {
+        width: 40px;
+        height: 40px;
+    }
+    .scroll-help:after {
+        left: 2px;
+        bottom: 2px;
+        transition: transform 0.4s, left 0.4s;
+        -webkit-transition: transform 0.4s, left 0.4s;
+    }
+    .scroll-help.active:after {
+        left: 7px;
+    }
+    .scroll-help:before {
+        width: 80px;
+        height: 80px;
+        border-radius: 30px;
+        padding: 0;
+    }
+    .scroll-help.active .scroll-top {
+        display: block;
+    }
+    div.container.padding-big {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .room-attrs {
+        margin: 0 15px;
+    }
+    .back-link-holder {
+        padding-left: 20px;
+    }
+}
+@media (max-width: 767px){
+    .background-slider{
+        position: static;
+        height: auto;
+    }
+    .page-column.homepage-column .page-content .grid .v720-1-of-2{
+        width: 100%;
+    }
+}
+@media (max-width: 720px) {
+    .sizing-options .v320-1 {
+        margin: 0 0 5px;
+    }
+    a.sizing-option {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+    div.room-attrs {
+        margin: 0 20px;
+    }
+    .back-link-holder {
+        width: 170px;
+    }
+    ul.grid.padding.big>* {
+        padding: 19px;
+    }
+    .room-attrs .views-row.icon-group-General div.views-field {
+        width: 90px;
+    }
+    .ui-accordion div.ui-accordion-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .room-attrs .views-row.icon-group-Media, .room-attrs .views-row.icon-group-Amenities {
+        width: 50%;
+    }
+    .gallery-fader.big nav {
+        display: block;
+    }
+    div.gallery-fader nav button {
+        height: 58px;
+    }
+}
+@media (max-width: 480px) {
+    .teaser .date {
+        margin-top: 0;
+    }
+    .teaser .clip {
+        clear: both;
+    }
+    .teaser .float-right {
+        margin-bottom: 15px;
+    }
+    /*homepage links*/
+    .home-thumbnails figcaption{
+        font-size:12px;
+    }
+}

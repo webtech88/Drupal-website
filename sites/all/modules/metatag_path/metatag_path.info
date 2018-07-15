@@ -1,0 +1,8 @@
+name = Meta tag per path
+description = Adds possibility to set meta tags per drupal path/alias.
+package = Meta tags
+core = 7.x
+version = 7.x-0.1-dev
+dependencies[] = metatag
+dependencies[] = entity
+dependencies[] = form_alter_base

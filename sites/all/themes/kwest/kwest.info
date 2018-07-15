@@ -1,0 +1,53 @@
+name = K-west
+description = Custom theme for K-West
+package = K-West
+version = 7.x-1.0
+core = 7.x
+
+stylesheets[screen][] = static/styles/normalize2.css
+stylesheets[screen][] = static/styles/fonts.css
+stylesheets[screen][] = static/styles/weather-icons.css
+stylesheets[screen][] = static/styles/analogclock.css
+stylesheets[screen][] = static/styles/icons.css
+stylesheets[screen][] = static/styles/base.css
+stylesheets[screen][] = static/styles/columns.css
+stylesheets[screen][] = static/styles/forms.css
+stylesheets[screen][] = static/styles/footer.css
+stylesheets[screen][] = static/styles/grid.css
+stylesheets[screen][] = static/styles/header.css
+stylesheets[screen][] = static/styles/wysiwyg.css
+stylesheets[screen][] = static/styles/main.css
+stylesheets[screen][] = eu_cookie_compliance_alter.css
+stylesheets[screen][] = custom.css
+
+stylesheets[screen][] = jc/css/style.css
+
+scripts[] = static/scripts/polyfills.js
+scripts[] = static/scripts/libs/jquery.simplemodal.js
+scripts[] = static/scripts/nebula/require.js
+scripts[] = static/scripts/settings.js
+scripts[] = static/scripts/nebula/utils/callable.js
+scripts[] = static/scripts/nebula/signal.js
+scripts[] = static/scripts/libs/jquery.js
+scripts[] = static/scripts/nebula/viewport.js
+scripts[] = static/scripts/nebula/smart_blocks.js
+scripts[] = static/scripts/jquery_ui.js
+scripts[] = static/scripts/labels.js
+scripts[] = static/scripts/placeholder.js
+scripts[] = static/scripts/detect.js
+scripts[] = static/scripts/safe_on.js
+scripts[] = static/scripts/scrollbar.js
+scripts[] = static/scripts/fader.js
+scripts[] = static/scripts/media_set.js
+scripts[] = static/scripts/image_loader.js
+scripts[] = static/scripts/site.js
+scripts[] = static/scripts/nebula/main.js
+
+regions[content] = Content
+regions[node_top] = Node Top
+regions[background] = Background
+regions[main_menu] = Main menu
+regions[footer_menu] = Footer menu
+regions[social_menu] = Social menu
+regions[sidebar] = Sidebar
+regions[book_form] = Book form

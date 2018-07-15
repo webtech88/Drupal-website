@@ -1,0 +1,63 @@
+.icon-arrow-down:before,
+.icon-arrow-left:before,
+.icon-arrow-right:before,
+.icon-arrow-up:before,
+.icon-book:before,
+.icon-camera:before,
+.icon-chef:before,
+.icon-clock:before,
+.icon-cuisine:before,
+.icon-facebook:before,
+.icon-google:before,
+.icon-instagram:before,
+.icon-like:before,
+.icon-location:before,
+.icon-map:before,
+.icon-menu:before,
+.icon-percent:before,
+.icon-pinterest:before,
+.icon-plane:before,
+.icon-quote:before,
+.icon-twitter:before,
+.icon-tripadvisor:before,
+.icon-x:before {
+    content: 'a';
+    color: #bea178;
+    font-size: 18px;
+    font-family: "Icons" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-block:before {display: block; line-height: 50px}
+.icon-right:before {float: right}
+
+.icon-arrow-down:before {content: "b"}
+.icon-arrow-left:before {content: "c"}
+.icon-arrow-right:before {content: "d"}
+.icon-arrow-up:before {content: "e"}
+.icon-book:before {content: "f"}
+.icon-camera:before {content: "g"}
+.icon-chef:before {content: "g"}
+.icon-clock:before {content: "i"}
+.icon-cuisine:before {content: "k"}
+.icon-facebook:before {content: "j"}
+.icon-google:before {content: "l"}
+.icon-instagram:before {content: "m"}
+.icon-like:before {content: "n"}
+.icon-location:before {content: "w"}
+.icon-map:before {content: "v"}
+.icon-menu:before {content: "u"}
+.icon-percent:before {content: "t"}
+.icon-pinterest:before {content: "s"}
+.icon-plane:before {content: "r"}
+.icon-quote:before {content: "q"}
+.icon-twitter:before {content: "p"}
+.icon-x:before {content: "o"}
+.icon-tripadvisor:before {content: "a"}

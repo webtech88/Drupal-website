@@ -1,0 +1,40 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_utils.html' as utils %}
+
+{% block header %}K-Fit{% endblock %}
+
+{% block content %}
+    <div class="clip">
+        <div class="grid padding big">
+            <div class="v320-1">
+                <div class="wysiwyg">
+                    <h2>About K-Fit</h2>
+                    <hr class="short thick">
+
+                    <p>K Fit gymnasium is home to the latest Star Trac cardiovascular and resistance equipment. Our cardiovascular equipment has an integrated personal audiovisual system, allowing guests their own choice of entertainment. The gym’s weight training section includes resistance machines, a free weights section, a multi-functional training unit, Power Plate and stretching area that will allow for a total body workout. Our fully qualified personal trainer can help tailor individual work out programs to suit your needs specifically based around your goals, lifestyle and current exercise regime.If you feel more motivated by working out in a group, our exercise classes are the right thing for you. In our Fitness Studio we run various classes including Zumba, Asthanga Yoga and many more!</p>
+                    <p>We would love to hear from you – if you have any questions about the spa, gym, fitness classes or anything else just email <a href="#">spatime@k-west.co.uk</a> or call 020 8008 6600 for more information.</p>
+                </div>
+            </div>
+            <div class="v320-1">
+                <p>
+                    <a href="#" class="button icon-arrow-right icon-right">Check out prices</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery-content %}
+    {{ utils.gallery('K-fit<br>Gallery') }}
+{% endblock %}
+
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid">
+        <div class="v320-1">
+            {% include '_opening_hours.html' %}
+        </div>
+        {{ utils.testimonial_intro() }}
+    </div>
+{% endblock %}

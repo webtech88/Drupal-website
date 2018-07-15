@@ -1,0 +1,16 @@
+name = Application
+description = Application
+core = 7.x
+package = APP
+version = 7.x-1.0-beta4
+project = application
+
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = diff
+dependencies[] = rooms
+# dependencies[] = devdata
+dependencies[] = production
+
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2

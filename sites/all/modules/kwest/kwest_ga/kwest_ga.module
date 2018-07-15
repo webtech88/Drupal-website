@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file
+ * Provides a configuration interface for Google Analytics.
+ */
+
+
+/**
+ * Implement hook_permission().
+ */
+function kwest_ga_permission() {
+  return array(
+    'administer ga configuration' => array(
+      'title' => t('Administer Google Analytics'),
+      'description' => t('Administer the K-West Google Analytics module configuration'),
+    ),
+  );
+}
+
+
+/**
+ * Implement hook_menu().
+ */
+function kwest_ga_menu() {
+  return array(
+    'admin/config/kwest/google-analytics' => array(
+      'title' => 'Google Analytics',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('kwest_ga_admin_form'),
+      'access arguments' => array('administer ga configuration'),
+      'type' => MENU_NORMAL_ITEM,
+    )
+  );
+}
+
+
+/**
+ * Defines the admin form.
+ */
+function kwest_ga_admin_form() {
+  $form = array(
+    'google_tagmanager_id' => array(
+      '#title' => t('Google Tagmanager ID'),
+      '#type' => 'textfield',
+      '#default_value' => variable_get('google_tagmanager_id', ''),
+    ),
+  /*  'google_analytics_id' => array(
+      '#title' => t('Google Analytics ID'),
+      '#type' => 'textfield',
+      '#default_value' => variable_get('google_analytics_id', ''),
+      '#required' => TRUE,
+    // Removed in issue #10371, replaced by Google Tagmanager.
+    ),*/
+    'google_site_verification_code' => array(
+      '#title' => t('Google Site Verification Code'),
+      '#type' => 'textfield',
+      '#default_value' => variable_get('google_site_verification_code', ''),
+    ),
+    'domain_verification_code' => array(
+      '#title' => t('Domain Verification Code'),
+      '#type' => 'textfield',
+      '#default_value' => variable_get('domain_verification_code', ''),
+    ),
+   /* 'clicky_id' => array(
+      '#title' => t('Clicky ID'),
+      '#type' => 'textfield',
+      '#default_value' => variable_get('clicky_id', ''),
+   // Removed in issue #10371, replaced by Google Tagmanager.
+    ),*/
+  );
+
+  return system_settings_form($form);
+}

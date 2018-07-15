@@ -1,0 +1,28 @@
+/*
+ * Styles for WYSIWYG editors like TinyMCE or CKEditor
+ */
+.wysiwyg *+p,
+.wysiwyg *+dl,
+.wysiwyg *+h1,
+.wysiwyg *+h2,
+.wysiwyg *+h3,
+.wysiwyg *+h4,
+.wysiwyg *+h5,
+.wysiwyg *+h6,
+.wysiwyg *+ol,
+.wysiwyg *+ul,
+.wysiwyg *+figure {margin-top: 18px}
+
+.wysiwyg ol,
+.wysiwyg ul {margin-left: 0; padding-left: 20px}
+.wysiwyg ul>li:before {content: '●'; float: left; margin-left: -20px}
+.wysiwyg ol>li {overflow: visible; list-style: decimal}
+
+.wysiwyg li ol,
+.wysiwyg li ul {margin-top: 0; margin-bottom: 0}
+
+.wysiwyg a {color: #936421; text-decoration: underline}
+.wysiwyg a:hover {text-decoration: none}
+
+.wysiwyg img {display: inline-block; vertical-align: middle}
+.wysiwyg figure img {display: block}

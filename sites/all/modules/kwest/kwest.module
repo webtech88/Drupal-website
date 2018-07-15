@@ -1,0 +1,102 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function kwest_menu() {
+    return array(
+        'admin/config/kwest' => array(
+            'title' => 'K West',
+            'page callback' => 'system_admin_menu_block_page',
+            'access arguments' => array('access administration pages'),
+            'file' => 'system.admin.inc',
+            'file path' => drupal_get_path('module', 'system'),
+            'position' => 'left',
+            'weight' => -20,
+        ),
+    );
+}
+
+/**
+ * Implements hook_views_pre_render().
+ * 
+ * Removes a text label field value from each row in room_attributes.
+ * 14/03/2016 - Superceded by the post_render hook, below.
+ */
+function kwest_views_pre_render(&$view) {
+
+  if ($view->name=='room_attributes') {
+
+/*
+ * DESKTOP ONLY
+ * class 'multiple' only to be added to second and greater of occupancy and suitability items 
+ * If there are more than 2 items then 3rd must have margin-left:150px 
+    $last_cat = '';
+    $last_label = '';
+    dpm($view);
+    foreach($view->result as $r => $result) {
+
+      $curr_cat = $result->taxonomy_term_data_taxonomy_term_hierarchy_name;
+      if(isset($view->result[$r]->field_field_icon_label[0]['rendered']['#markup'])) {
+        $curr_label = $view->result[$r]->field_field_icon_label[0]['rendered']['#markup'];
+      }
+      else {
+        $curr_label = '';
+      }
+      
+      if (($curr_cat == $last_cat) && ($curr_label == $last_label)) {
+        $view->result[$r]->field_field_icon_label[0]['rendered']['#markup'] = '';
+      }
+      else {
+        $last_cat = $result->taxonomy_term_data_taxonomy_term_hierarchy_name;
+        if(isset($view->result[$r]->field_field_icon_label[0]['rendered']['#markup'])) {
+          $last_label = $view->result[$r]->field_field_icon_label[0]['rendered']['#markup'];
+        }
+        else {
+          $last_label = '';
+        }
+          
+      }
+
+    }
+*/
+
+  }
+
+}
+
+/**
+ * Implements hook_views_post_render().
+ * 
+ * Adds a class to each row in room_attributes to aid front-end styling.
+ */
+function kwest_views_post_render(&$view, &$output, &$cache) {
+  
+  if ($view->name == 'room_attributes') {
+    $swaps = array();
+
+    $last_cat = '';
+    $curr_count = 0;
+    foreach ($view->result as $key => $value) {
+        
+      if(isset($value->field_field_icon_label[0]['rendered']['#markup'])) {
+        $curr_cat = $value->field_field_icon_label[0]['rendered']['#markup'];
+      }
+      else {
+        $curr_cat = '';
+      }
+      if (($curr_cat == '') || ($curr_cat != $last_cat)) {
+        $curr_count = 0;
+        $last_cat = $curr_cat;
+      }
+      $curr_count = $curr_count + 1;
+      
+      $new_class_name = 'icon-index-' . $curr_count;
+      $curr_class_name = 'icon-index-' . $value->field_data_field_room_icons_field_room_icons_tid;
+      $swaps = array(
+        $curr_class_name => $new_class_name,
+      );
+      $output = strtr($output, $swaps);
+    }
+  }
+}
+

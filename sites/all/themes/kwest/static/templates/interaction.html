@@ -1,0 +1,44 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Interaction<br>Page{% endblock %}
+
+{% block content %}
+    <div class="wysiwyg">
+        <h2>K west in social media</h2>
+        <hr class="short thick">
+
+        <div class="grid padding">
+            <div class="v320-1 v720-1-of-2">
+                <div class="social-widget">
+                    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width&amp;height=590&amp;colorscheme=dark&amp;show_faces=true&amp;header=true&amp;stream=true&amp" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:590px;" allowTransparency="true"></iframe>
+                </div>
+            </div>
+            <div class="v320-1 v720-1-of-2">
+                <div class="social-widget">
+                    <a class="twitter-timeline" height="590" data-dnt="true" href="https://twitter.com/Pawcio27344885"  data-widget-id="466242907062550528">Tweets by @Pawcio27344885</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+            </div>
+            <div class="v320-1">
+                <div class="social-widget">
+                    <a data-pin-do="embedBoard" href="http://www.pinterest.com/pinterest/pin-pets/"></a>
+                    <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery-content %}
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid">
+        {{ utils.testimonial_intro() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+    </div>
+{% endblock %}

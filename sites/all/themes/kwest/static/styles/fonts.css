@@ -1,0 +1,66 @@
+/*
+ * Source Sans Pro
+ */
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/source_sans_pro_light.eot');
+    src: url('../fonts/source_sans_pro_light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/source_sans_pro_light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/source_sans_pro_light_italic.eot');
+    src: url('../fonts/source_sans_pro_light_italic.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/source_sans_pro_light_italic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+/*
+ * Museo
+ */
+@font-face {
+  font-family: 'Museo';
+  src: url('../fonts/museo.eot');
+  src: url('../fonts/museo.eot?#iefix') format('eot'),
+  url('../fonts/museo.woff') format('woff'),
+  url('../fonts/museo.ttf') format('truetype'),
+  url('../fonts/museo.svg#webfont') format('svg');
+}
+
+
+/*
+ * Zerospace
+ */
+@font-face {
+    font-family: 'Zerospace';
+    src: url('../fonts/zerospace.eot');
+    src: url('../fonts/zerospace.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/zerospace.ttf') format('truetype');
+}
+
+
+/*
+ * Icons
+ */
+@font-face {
+    font-family: "Icons";
+    src: url("../fonts/icons.eot");
+    src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/icons.svg") format("svg"),
+         url("../fonts/icons.ttf") format("truetype");
+}
+
+/*
+ * Lato Light font
+ */
+@font-face {
+    font-family: 'Lato Light';
+    src: url('../fonts/Lato-Light.eot');
+    src: url('../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Lato-Light.ttf') format('truetype');
+}

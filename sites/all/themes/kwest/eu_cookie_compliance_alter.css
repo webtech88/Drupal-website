@@ -1,0 +1,74 @@
+#sliding-popup .popup-content{
+    padding:20px;
+    overflow: hidden;
+}
+#sliding-popup .popup-content #popup-text {
+    margin: 0;
+}
+#sliding-popup .popup-content #popup-text p {
+    font-size: 14px;
+    font-weight: 400;
+    margin:0;
+    line-height: 30px;
+}
+#sliding-popup .popup-content #popup-buttons button {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    padding: 0 14px;
+    margin-top: 0;
+    border: none;
+    background: #bea178;
+    color: #222 !important;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-family: 'Source Sans Pro', 'Arial', 'Helvetica', sans-serif;
+    font-weight: 400;
+    -webkit-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+    filter: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    text-shadow: none;
+    -webkit-text-shadow: none;
+    -moz-text-shadow: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+#sliding-popup .popup-content #popup-buttons button:hover {
+    background: #bea178;
+    filter: none;
+    opacity: .75;
+}
+#popup-text{
+    text-align: center;
+}
+@media screen and (max-width: 960px) {
+    #sliding-popup .popup-content{
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 760px) {
+    #sliding-popup .popup-content #popup-buttons,
+    #sliding-popup .popup-content #popup-text{
+        max-width: 50%;
+    }
+    #sliding-popup .popup-content #popup-buttons button {
+        margin:0;
+    }
+    #sliding-popup .popup-content #popup-text p{
+        line-height: 1.4;
+    }
+}
+@media screen and (max-width: 600px) {
+    #sliding-popup .popup-content #popup-buttons,
+    #sliding-popup .popup-content #popup-text{
+        float: none;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+}

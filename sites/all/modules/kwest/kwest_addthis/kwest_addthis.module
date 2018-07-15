@@ -1,0 +1,35 @@
+<?php
+
+function kwest_addthis_permission() {
+    return array(
+        'manage addthis settings' => array(
+            'title' => t('Manage addthis settings'),
+        ),
+    );
+}
+
+
+function kwest_addthis_menu() {
+    return array(
+        'admin/config/kwest/addthis' => array(
+            'title' => 'Addthis',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_addthis_admin_form'),
+            'access arguments' => array('manage addthis settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+    );
+}
+
+
+function kwest_addthis_admin_form() {
+    $form = array(
+        'kwest_addthis_profile_id' => array(
+            '#title' => 'Profile ID',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_addthis_profile_id', ''),
+        ),
+    );
+    return system_settings_form($form);
+}

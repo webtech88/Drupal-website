@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the JC Features feature.
+ */
+
+include_once 'jc_features.features.inc';

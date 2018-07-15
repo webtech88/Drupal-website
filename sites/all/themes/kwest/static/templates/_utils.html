@@ -1,0 +1,182 @@
+{% macro enjoy() %}
+    <div class="grid">
+        <div class="v320-1">
+            <h3 class="icon-block icon-like no-margin-bottom">Why<br>you would<br>enjoy it?</h3>
+        </div>
+        <div class="v320-1 v480-1-of-2 v720-1">
+            <p><span class="number">1</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="v320-1 v480-1-of-2 v720-1">
+            <p><span class="number">2</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="v320-1 v480-1-of-2 v720-1">
+            <p><span class="number">3</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro gallery(heading) %}
+    <div class="grid rtl middle">
+        <div class="v320-1 {% if heading %}v480-1-of-2 v720-3-of-4 v1280-4-of-5{% else %}v480-1 v720-1 v1280-1 no-triangle{% endif %} gallery-items">
+            <div class="grid">
+                <div class="v320-1 v720-1-of-3 v1280-1-of-4">
+                    {{ thumbnail() }}
+                </div>
+                <div class="v320-1 v720-1-of-3 v1280-1-of-4">
+                    {{ thumbnail() }}
+                </div>
+                <div class="v320-1 v720-1-of-3 v1280-1-of-4">
+                    {{ thumbnail() }}
+                </div>
+                <div class="v320-1 v720-1-of-3 v1280-1-of-4">
+                    {{ thumbnail() }}
+                </div>
+            </div>
+        </div>
+
+        {% if heading %}
+        <div class="v320-1 v480-1-of-2 v720-1-of-4 v1280-1-of-5 text-center">
+            <div class="tile container">
+                <div>
+                    <h3 class="icon-block icon-camera">{{ heading|safe }}</h3>
+                    <p>Fusce in enim vel ligula ornare tristique non dui gravida.</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+
+{% macro close_button() %}
+    <p class="float-right close">
+        <a href="#" class="hide-text icon-x">Close</a>
+    </p>
+{% endmacro %}
+
+
+{% macro image(width, height, viewports, fallback) %}
+    {% set attr = 'data-src' %}
+
+    {% if not width %}
+        {% set width = 198 %}
+    {% endif %}
+
+    {% if not height %}
+        {% set height = 198 %}
+    {% endif %}
+
+    {% set r = Math.random() %}
+
+    {% if viewports or fallback %}
+        {% set attr = 'data-src' %}
+    {% endif %}
+
+    <img {{ attr }}="http://lorempixel.com/{{ width }}/{{ height }}/city?asd={{ r }}" alt="" width="{{ width }}" height="{{ height }}" {% if viewports %}data-viewports="{{ viewports }}"{% endif %} {% if fallback %}data-fallback{% endif %}>
+{% endmacro %}
+
+
+{% macro lipsum(n) %}
+    {% set words = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae odio egestas leo pharetra lacinia a non lorem. Ut porta vestibulum ante et rutrum. Mauris gravida consequat elit, ac consectetur tortor dictum eget. Nulla id quam purus. Phasellus egestas dictum nunc, et consequat est convallis nec. Aenean id risus at nunc luctus auctor at at eros. In a ullamcorper quam. Nunc porttitor justo in nunc volutpat, quis pulvinar arcu gravida. Vestibulum volutpat vel lacus ac volutpat. Curabitur sem erat, tempor sed sodales molestie, condimentum in velit. Ut eleifend, mi ut iaculis malesuada, metus arcu pharetra magna, in consequat metus neque quis sem. Donec scelerisque adipiscing sem sit amet bibendum. Donec vestibulum velit tristique lectus ultrices, sit amet aliquet purus vestibulum. Quisque sagittis urna libero, et condimentum urna luctus molestie. Duis ut rutrum massa. '%}
+    {% set wordsArray = words.split(' ') %}
+    {% set count = Math.ceil(Math.random() * n) %}
+    {% set result = wordsArray.slice(0, count) %}
+    {{ result|join(' ') }}
+{% endmacro %}
+
+
+{% macro thumbnail(width, height, classes, mediaSet, linkTo, allViewports) %}
+    {% if not width %}
+        {% set width = 198 %}
+    {% endif %}
+
+    {% if not height %}
+        {% set height = 198 %}
+    {% endif %}
+
+    {% if not linkTo %}
+        {% set linkTo = '/gallery.html' %}
+    {% endif %}
+
+    {% if not allViewports %}
+        {% set allViewports = '480 720 960 1280 1600 1920' %}
+    {% endif %}
+
+    <figure {% if classes %}class="{{ classes }}"{% endif %}>
+        <script type="image/media-set">
+            {% if width == 198 and height == 198 %}
+                <a href="{{ linkTo }}" class="zoom-thumb" data-viewports="320" style="display: block; width: 320px; height: 160px">
+                    {{ image(320, 160, '320') }}
+                </a>
+                <a href="{{ linkTo }}" class="zoom-thumb" data-viewports="{{ allViewports }}" style="display: block; width: {{ width }}px; height: {{ height }}px">
+                    {{ image(width, height, allViewports) }}
+                </a>
+            {% endif %}
+        </script>
+    </figure>
+{% endmacro %}
+
+
+{% macro sidebar_image() %}
+    {{ thumbnail(198, 198, 'sidebar-image triangle-color-inverted') }}
+{% endmacro %}
+
+
+{% macro background() %}
+    <figure>
+        <script type="image/media-set">
+            {{ image(320, 568, '320 viewport-portrait') }}
+            {{ image(320, 236, '320') }}
+            {{ image(480, 354, '480') }}
+            {{ image(720, 960, '720 viewport-portrait') }}
+            {{ image(720, 532, '720') }}
+            {{ image(960, 710, '960') }}
+            {{ image(1280, 946, '1280') }}
+            {{ image(1723, 1274, null, true) }}
+        </script>
+    </figure>
+{% endmacro %}
+
+
+{% macro gallery_big_image(number, label) %}
+    <figure>
+        <script type="image/media-set">
+            {{ image(320, 167, '320') }}
+            {{ image(480, 250, '480') }}
+            {{ image(720, 376, '720') }}
+            {{ image(960, 500, '960') }}
+            {{ image(1280, 668, '1280') }}
+            {{ image(1723, 600 + Math.floor(Math.random() * 300), null, true) }}
+        </script>
+        <figcaption>
+            {{ label }}
+        </figcaption>
+    </figure>
+{% endmacro %}
+
+
+{% macro testimonial_intro() %}
+    <div class="v320-1">
+        <h3 class="icon-block icon-quote">Testimonials</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+{% endmacro %}
+
+{% macro testimonial_item() %}
+    <div class="v320-1 v480-1-of-2 v720-1">
+        <p class="icon-block icon-quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+{% endmacro %}
+
+{% macro home_thumbnail() %}
+    <li>test</li>
+    <li class="v320-2-of-5 v720-1-of-4 v960-1-of-5 v1280-1-of-6 v1600-1-of-7">
+        <a href="#">
+            <figure>
+                {{ utils.image(198, 198) }}
+                <figcaption class="h3">{{ lipsum(4) }}</figcaption>
+            </figure>
+        </a>
+    </li>
+{% endmacro %}

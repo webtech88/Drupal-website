@@ -1,0 +1,52 @@
+{% import '_utils.html' as utils %}
+
+{% macro teaser(image, hr) %}
+    <div class="teaser">
+        {% if image %}
+            <figure class="margin-bottom">
+                <a href="blog_post.html">
+                    {{ utils.image(672, 130) }}
+                </a>
+            </figure>
+        {% endif %}
+
+        <p class="date float-left">15 <span>mar</span></p>
+
+        <div class="clip wysiwyg">
+            <h3>
+                <a href="blog_post.html" class="transparent-link">Lorem ipsum dolor</a>
+            </h3>
+
+            <p>Duis vulputate tempus tellus, a sollicitudin mi consequat et. Nunc ligula magna, euismod non sapien quis, ornare lobortis sem. Integer quis vestibulum nisl. Fusce convallis nunc sed dictum viverra. Proin interdum fringilla velit, id pharetra felis. <a href="blog_post.html" class="icon-link icon-arrow-right icon-right">Read More</a></p>
+        </div>
+    </div>
+    {% if hr %}
+        <hr class="short light">
+    {% endif %}
+{% endmacro %}
+
+{% macro post(image) %}
+    <h2>Lorem ipsum dolor amet</h2>
+    <hr class="short thick">
+    <div class="teaser">
+        {% if image %}
+            <figure class="margin-bottom">
+                {{ utils.image(672, 130) }}
+            </figure>
+        {% endif %}
+
+        <p class="date float-left">15 <span>mar</span></p>
+
+        <div class="clip wysiwyg">
+            <p>Duis vulputate tempus tellus, a sollicitudin mi consequat et. Nunc ligula magna, euismod non sapien quis, ornare lobortis sem. Integer quis vestibulum nisl. Fusce convallis nunc sed dictum viverra. Proin interdum fringilla velit, id pharetra felis.</p>
+
+            <ul>
+                <li>Maecenas vitae ullamcorper felis.</li>
+                <li>Integer pretium urna posuere sem porta, </li>
+                <li>Nec hendrerit nisi tempus. </li>
+            </ul>
+
+            <p>Aliquam congue luctus mauris, rhoncus cursus nisi venenatis vel. Aenean pellentesque pharetra ante, at facilisis sapien placerat et. Quisque in consectetur ipsum. </p>
+        </div>
+    </div>
+{% endmacro %}

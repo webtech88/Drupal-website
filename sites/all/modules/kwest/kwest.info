@@ -1,0 +1,5 @@
+name = Kwest Core
+description = K-West core module
+package = K-West
+version = 7.x-1.0
+core = 7.x

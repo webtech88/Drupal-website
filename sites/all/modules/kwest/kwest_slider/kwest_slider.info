@@ -1,0 +1,7 @@
+name = Kwest Slider JC
+description = Provide custom blocks for content type "kwest_page_slider". Create required taxonomy "Slider Placement".
+package = K-West
+version = 7.x-1.0
+core = 7.x
+dependencies[] = kwest
+dependencies[] = kwest_core

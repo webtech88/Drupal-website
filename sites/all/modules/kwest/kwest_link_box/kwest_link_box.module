@@ -1,0 +1,93 @@
+<?php
+function kwest_link_box_permission() {
+    return array(
+        'manage link box settings' => array(
+            'title' => t('Manage link box settings'),
+        ),
+    );
+}
+
+
+function kwest_link_box_menu() {
+    return array(
+        'admin/config/kwest/link_box' => array(
+            'title' => 'Link box',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_link_box_admin_form'),
+            'access arguments' => array('manage link box settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+    );
+}
+
+function kwest_link_box_block_info() {
+    return array(
+        'link_box' => array(
+            'info' => 'Link box',
+        ),
+    );
+}
+
+function kwest_link_box_block_view($delta='') {
+    if ($delta === 'link_box')
+        return array(
+            'subject' => 'Link box',
+            'content' => link_box(),
+        );
+    return array();
+}
+
+function kwest_link_box_admin_form() {
+    $form = array(
+        'kwest_link_box_image' => array(
+            '#type' => 'managed_file',
+            '#upload_location' => 'public://link_box/',
+            '#title' => 'Image',
+            '#default_value' => variable_get('kwest_link_box_image'),
+        ),
+        'kwest_link_box_link_url' => array(
+            '#title' => 'Link Url',
+            '#type' => 'textfield',
+            '#default_value' => variable_get('kwest_link_box_link_url', '<front>'),
+        ),
+        'kwest_link_box_link_title' => array(
+            '#title' => 'Link Title',
+            '#type' => 'textfield',
+            '#default_value' => variable_get('kwest_link_box_link_title', ''),
+        ),
+    );
+    $form = system_settings_form($form);
+    $form['#submit'][] = 'link_box_admin_form_submit';
+    return $form;
+}
+
+
+
+function link_box_admin_form_submit($form, &$form_state) {
+	if(isset($form_state['values']['kwest_link_box_image']) && is_string($form_state['values']['kwest_link_box_image']) && strlen($form_state['values']['kwest_link_box_image']) > 0) {
+	    $file = file_load($form_state['values']['kwest_link_box_image']);
+	    $file->status = FILE_STATUS_PERMANENT;
+	    file_save($file);
+	    # Assign the image to admin user. It's a hack to prevent removal of "unused" images.
+	    file_usage_add($file, 'user', 'user', 1);
+	}
+}
+
+
+function link_box(){
+	$link_title = variable_get('kwest_link_box_link_title');
+	$link_url = variable_get('kwest_link_box_link_url');
+	$link_image = file_load(variable_get('kwest_link_box_image'));
+
+	return theme('link_box', array('link_title' => $link_title, 'link_url' => $link_url, 'link_image' => $link_image));
+}
+
+
+function kwest_link_box_theme() {
+    return array(
+      'link_box' => array(
+        'template' => 'kwest-link_box',
+      	'variables' => array('link_title' => NULL, 'link_url' => NULL, 'link_image' => NULL),
+	  ),
+    );
+}

@@ -1,0 +1,39 @@
+<?php
+function kwest_gallery_menu() {
+    return array(
+        'node/%node/gallery' => array(
+            'title callback' => 'kwest_gallery_title',
+            'page callback' => 'kwest_gallery_gallery',
+            'page arguments' => array(1),
+            'access callback' => true,
+            'type' => MENU_CALLBACK,
+        ),
+    );
+}
+
+
+function kwest_gallery_theme() {
+    return array(
+        'kwest_gallery_gallery' => array(
+            'variables' => array('photos' => array()),
+            'template' => 'kwest-gallery-gallery',
+        ),
+        'kwest_gallery_item' => array(
+            'variables' => array('path' => null),
+            'template' => 'kwest-gallery-item',
+        ),
+    );
+}
+
+
+function kwest_gallery_gallery($node) {
+    $gallery_id = $node->field_gallery[LANGUAGE_NONE][0];
+    $gallery = entity_load_single('field_collection_item', $gallery_id);
+    $photos = $gallery->field_photo[LANGUAGE_NONE];
+
+    return theme('kwest_gallery_gallery', array(
+        'photos' => $photos,
+        'i' => 0,
+        'count' => count($photos),
+    ));
+}

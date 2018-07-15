@@ -1,0 +1,9 @@
+body * {display: none}
+#upgrade {display: block;
+clear: expression(
+    this.style.paddingTop = (this.offsetHeight < this.parentNode.offsetHeight ? parseInt((this.parentNode.offsetHeight - this.offsetHeight) / 2) + "px" : "0"),
+    this.style.clear = "none", 0
+);}
+#upgrade p {display: block; text-align: center; color: #fff}
+#upgrade p.logo {padding: 0 0 40px}
+#upgrade p.logo img {display: inline}

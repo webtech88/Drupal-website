@@ -1,0 +1,98 @@
+<?php
+require_once 'metatagpathuicontroller.class.php';
+require_once 'metatagpathformalter.class.php';
+
+
+/**
+ * Implementation of hook_entity_info().
+ */
+function metatag_path_entity_info() {
+	return array(
+		'metatagpath' => array(
+			'label' => t('Path'),
+			'entity class' => 'Entity',
+			'controller class' => 'EntityAPIController',
+			'base table' => 'metatag_path_paths',
+			'fieldable' => false,
+			'entity keys' => array(
+				'id' => 'pid',
+				'label' => 'path',
+			),
+			'admin ui' => array(
+				'path' => 'admin/config/search/metatags/paths',
+				'file' => 'metatag_path.admin.inc',
+				'controller class' => 'MetaTagPathUIController',
+			),
+			'module' => 'metatag_path',
+			'access callback' => 'metatagpath_access',
+			'metatags' => true,
+		),
+	);
+}
+
+
+/**
+ * Implementation of hook_page_alter().
+ */
+function metatag_path_page_alter(&$page) {
+	$entities = entity_load('metatagpath', false, array('path' => $_GET['q']));
+	$entity = reset($entities);
+	if ($entity) {
+		$metatags = isset($entity->metatags) ? $entity->metatags : array();
+		if (!is_array($page['content']['metatags']['global']))
+			$page['content']['metatags']['global'] = array();
+		$page['content']['metatags']['global'] = array_merge(
+			$page['content']['metatags']['global'],
+			metatag_metatags_view('metatagpath', $metatags)
+		);
+	}
+}
+
+
+/**
+ * Implementation of hook_metatag_config_default_alter().
+ * Looks like it should have been implemented via hook_metatag_config_default,
+ * but it only works with _alter.
+ */
+function metatag_path_metatag_config_default_alter(&$configs) {
+	$config = new stdClass();
+	$config->instance = 'metatagpath';
+	$config->api_version = 1;
+	$config->disabled = false;
+	$config->config = array(
+		'title' => array('value' => '[current-page:title] | [site:name]'),
+		'generator' => array('value' => 'Drupal 7 (http://drupal.org)'),
+	);
+
+	$configs[$config->instance] = $config;
+}
+
+
+/**
+ * Implementation of hook_metatag_config_instance_info_alter().
+ * Looks like it should have been implemented via hook_metatag_config_instance_info,
+ * but it only works with _alter.
+ */
+function metatag_path_metatag_config_instance_info_alter() {
+	return array(
+		'metatagpath' => array(
+			'label' => t('Path'),
+		),
+	);
+}
+
+
+/**
+ * Path load callback
+ */
+function metatagpath_load($pid) {
+	return entity_load_single('metatagpath', $pid);
+}
+
+
+/**
+ * Access callback
+ */
+function metatagpath_access($op, $type = null, $account = null) {
+	return user_access('administer meta tags', $account);
+}

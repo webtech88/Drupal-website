@@ -1,0 +1,206 @@
+<?php
+
+function interaction_permission() {
+    return array(
+        'manage interaction settings' => array(
+            'title' => t('Manage interaction settings'),
+        ),
+    );
+}
+
+
+function interaction_menu() {
+    return array(
+        'interaction' => array(
+            'title' => 'Interaction page',
+            'page callback' => 'interaction_interaction_page',
+            'access callback' => true,
+            'type' => MENU_CALLBACK,
+        ),
+        'admin/config/kwest/interaction' => array(
+            'title' => 'Interaction',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('interaction_admin_form'),
+            'access arguments' => array('manage interaction settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+    );
+}
+
+
+function interaction_admin_form($form, &$form_state) {
+    // facebook settings
+    $facebook_data = variable_get('interaction_facebook', '');
+    $facebook_id = (!empty($facebook_data['id'])) ? $facebook_data['id'] : '';
+    $facebook_status = (!empty($facebook_data['status'])) ? $facebook_data['status'] : 0;
+    $form['interaction_facebook'] = array(
+      '#type' => 'fieldset', 
+      '#title' => t('Settings for Facebook'), 
+      '#collapsible' => FALSE, 
+      '#collapsed' => FALSE,
+      '#tree' => TRUE,
+    );
+    $form['interaction_facebook']['id'] = array(
+        '#title' => 'Facebook ID',
+        '#type' => 'textfield',
+        '#required' => true,
+        '#default_value' => $facebook_id,
+    );
+    $form['interaction_facebook']['status'] = array(
+        '#type' => 'checkbox',
+        '#options' => array(t('Yes'), t('No')),
+        '#title' => t('Enable'),
+        '#required' => FALSE,
+        '#default_value' => $facebook_status,
+    );
+    // twitter settings
+    $twitter_data = variable_get('interaction_twitter', '');
+    $twitter_id = (!empty($twitter_data['id'])) ? $twitter_data['id'] : '';
+    $twitter_widget_id = (!empty($twitter_data['widget_id'])) ? $twitter_data['widget_id'] : '';
+    $twitter_status = (!empty($twitter_data['status'])) ? $twitter_data['status'] : 0;
+    $form['interaction_twitter'] = array(
+      '#type' => 'fieldset', 
+      '#title' => t('Settings for Twitter'), 
+      '#collapsible' => FALSE, 
+      '#collapsed' => FALSE,
+      '#tree' => TRUE,
+    );
+    $form['interaction_twitter']['id'] = array(
+        '#title' => 'Twitter ID',
+        '#type' => 'textfield',
+        '#required' => true,
+        '#default_value' => $twitter_id,
+    );
+    $form['interaction_twitter']['widget_id'] = array(
+        '#title' => 'Twitter Widget ID',
+        '#type' => 'textfield',
+        '#required' => true,
+        '#default_value' => $twitter_widget_id,
+    );
+    $form['interaction_twitter']['status'] = array(
+        '#type' => 'checkbox',
+        '#options' => array(t('Yes'), t('No')),
+        '#title' => t('Enable'),
+        '#required' => FALSE,
+        '#default_value' => $twitter_status,
+    );
+    // pinterest settings
+    $pinterest_data = variable_get('interaction_pinterest', '');
+    $pinterest_user_id = (!empty($pinterest_data['user_id'])) ? $pinterest_data['user_id'] : '';
+    $pinterest_gallery_id = (!empty($pinterest_data['gallery_id'])) ? $pinterest_data['gallery_id'] : '';
+    $pinterest_status = (!empty($pinterest_data['status'])) ? $pinterest_data['status'] : 0;
+    $form['interaction_pinterest'] = array(
+      '#type' => 'fieldset', 
+      '#title' => t('Settings for Pinterest'), 
+      '#collapsible' => FALSE, 
+      '#collapsed' => FALSE,
+      '#tree' => TRUE,
+    );
+    $form['interaction_pinterest']['user_id'] = array(
+        '#title' => 'Pinterest User ID',
+        '#type' => 'textfield',
+        '#required' => true,
+        '#default_value' => $pinterest_user_id,
+    );
+    $form['interaction_pinterest']['gallery_id'] = array(
+        '#title' => 'Pinterest Gallery ID',
+        '#type' => 'textfield',
+        '#required' => true,
+        '#default_value' => $pinterest_gallery_id,
+    );
+    $form['interaction_pinterest']['status'] = array(
+        '#type' => 'checkbox',
+        '#options' => array(t('Yes'), t('No')),
+        '#title' => t('Enable'),
+        '#required' => FALSE,
+        '#default_value' => $pinterest_status,
+    );
+
+    $form['interaction_background'] = array(
+        '#type' => 'managed_file',
+        '#upload_location' => 'public://interaction/',
+        '#title' => 'Background',
+        '#default_value' => variable_get('interaction_background'),
+    );
+
+    $form = system_settings_form($form);
+    $form['#submit'][] = 'interaction_admin_form_submit';
+    return $form;
+}
+
+
+function interaction_admin_form_submit($form, &$form_state) {
+    $file = file_load($form_state['values']['interaction_background']);
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+    # Assign the image to admin user. It's a hack to prevent removal of "unused" images.
+    file_usage_add($file, 'user', 'user', 1);
+}
+
+
+function interaction_theme() {
+    return array(
+        'interaction_page' => array(
+            'variables' => array(
+                'facebook_id' => null,
+                'facebook_status' => null,
+                'twitter_id' => null,
+                'twitter_widget_id' => null,
+                'twitter_status' => null,
+                'pinterest_user_id' => null,
+                'pinterest_gallery_id' => null,
+                'pinterest_status' => null,
+            ),
+            'template' => 'interaction',
+        ),
+        'interaction_twitter_block' => array(
+            'variables' => array(
+                'twitter_id' => null,
+                'twitter_widget_id' => null,
+                'twitter_status' => null,
+            ),
+            'template' => 'interaction-twitter-block',
+        ),
+    );
+}
+
+
+function interaction_interaction_page() {
+    $facebook_data = variable_get('interaction_facebook', '');
+    $twitter_data = variable_get('interaction_twitter', '');
+    $pinterest_data = variable_get('interaction_twitter', '');
+
+    return theme('interaction_page', array(
+        'facebook_id' => (!empty($facebook_data['id'])) ? $facebook_data['id'] : '',
+        'facebook_status' => (!empty($facebook_data['status'])) ? $facebook_data['status'] : 0,
+        'twitter_id' => (!empty($twitter_data['id'])) ? $twitter_data['id'] : '',
+        'twitter_widget_id' => (!empty($twitter_data['widget_id'])) ? $twitter_data['widget_id'] : '',
+        'twitter_status' => (!empty($twitter_data['status'])) ? $twitter_data['status'] : 0,
+        'pinterest_user_id' => (!empty($pinterest_data['user_id'])) ? $pinterest_data['user_id'] : '',
+        'pinterest_gallery_id' => (!empty($pinterest_data['gallery_id'])) ? $pinterest_data['gallery_id'] : '',
+        'pinterest_status' => (!empty($pinterest_data['status'])) ? $pinterest_data['status'] : 0,
+    ));
+}
+
+function interaction_block_info() {
+    return array(
+        'twitter' => array(
+            'info' => 'Twitter',
+            'cache' => DRUPAL_CACHE_GLOBAL,
+        ),
+    );
+}
+
+function interaction_block_view($delta) {
+    if ($delta == 'twitter') {
+        $twitter_data = variable_get('interaction_twitter', '');
+        return array(
+            'subject' => 'Tweets by @' . $twitter_id,
+            'content' => theme('interaction_twitter_block', array(
+                'twitter_id' => (!empty($twitter_data['id'])) ? $twitter_data['id'] : '',
+                'twitter_widget_id' => (!empty($twitter_data['widget_id'])) ? $twitter_data['widget_id'] : '',
+                'twitter_status' => (!empty($twitter_data['status'])) ? $twitter_data['status'] : 0,
+            )),
+        );
+    }
+}

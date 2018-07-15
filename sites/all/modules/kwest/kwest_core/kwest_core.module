@@ -1,0 +1,201 @@
+<?php
+
+/*
+* Friendly func. for code debug
+*/
+if(!function_exists('pa')){
+ function pa($mixed, $stop = false, $ip = false){
+    if(!$ip || ($ip && ((isset($_SERVER['HTTP_X_REAL_IP']) && $ip == $_SERVER['HTTP_X_REAL_IP']) || $ip == $_SERVER['REMOTE_ADDR']))){
+     $ar = debug_backtrace(); $key = pathinfo($ar[0]['file']); $key = $key['basename'].':'.$ar[0]['line'];
+     $print = array($key => $mixed); echo( '<pre>'.htmlentities(print_r($print,1)).'</pre>' );
+     if($stop == 1) exit();
+    }
+ }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function kwest_core_menu() {
+ // Configure general K-West JC settings
+ $items['admin/config/kwest/jc-core'] = array(
+  'title' => t('K-West JC'),
+  'description' => t('K-West JC settings'),
+  'page callback' => '_kwest_core_admin_settings',
+  'type' => MENU_NORMAL_ITEM,
+  'file' => 'inc/kwest_core.admin.inc',
+  'access arguments' => array('administer site configuration'),
+ );
+ return $items;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function kwest_core_preprocess_page(&$vars) {
+ $kwest_core_data = variable_get('kwest_core_settings', '');
+ // not rewrite messages for admin
+ if(!empty($kwest_core_data['messages']) && !path_is_admin(current_path())){
+  drupal_add_css(drupal_get_path('module', 'kwest_core'). '/css/plugins/noty.css');
+  drupal_add_js(drupal_get_path('module', 'kwest_core'). '/js/plugins/noty.js');
+
+  if(!empty($_SESSION['messages'])){
+    $messages = $_SESSION['messages'];
+    unset($_SESSION['messages']);
+    $types = array_keys($messages);
+    foreach ($types as $key => $type) {
+      $messages_print_text = trim(strip_tags(implode("<br>", $messages[$type]), "<br>"));
+      if($type == 'warning' || $type == 'error'){
+        $messages_type = $type;
+      }else{
+        $messages_type = 'success';
+      }
+      $messages_print_type = '<span style="display:block;font-size:1.3em;font-weight:bold;">' .ucfirst($messages_type). '</span>';
+      drupal_add_js("jQuery(document).ready(function(){
+        new Noty({
+            theme: 'metroui',
+            title: 'Title',
+            timeout: 3000,
+            layout: 'topRight',
+            closeWith: ['button'],
+            type: '" .$messages_type. "',
+            text: '" .$messages_print_type. "'+'" .$messages_print_text. "',
+        }).show();
+      });
+      ", 'inline');
+    }
+  }
+
+ }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function kwest_core_block_info() {
+ $blocks = array();
+ $blocks['kwest_core_scroll_help'] = array(
+     'info' => t('Block: Scroll help'),
+     'cache' => DRUPAL_CACHE_PER_ROLE,
+ );
+ $blocks['kwest_core_backlink'] = array(
+     'info' => t('Block: Back Link'),
+     'cache' => DRUPAL_CACHE_PER_ROLE,
+ );
+ return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function kwest_core_block_view($delta = '') {
+ $block = array();
+ //drupal_add_css(drupal_get_path('theme', 'kwest'). '/jc/css/style.css');
+ drupal_add_js(drupal_get_path('module', 'kwest_core'). '/js/plugins/jquery-scrolltofixed.js');
+ drupal_add_js(drupal_get_path('module', 'kwest_core'). '/js/kwest_core.js');
+ 
+ module_load_include('inc', 'kwest_core', 'inc/kwest_core.blocks');
+ switch($delta){
+  case 'kwest_core_scroll_help':
+      $block['subject'] = '';
+      $block['content'] = theme('kwest_core_scroll_help');
+    break;
+  case 'kwest_core_backlink':
+      $block['subject'] = '';
+      $block['content'] = theme('kwest_core_backlink');
+    break;
+  default:
+    break;
+ }
+ 
+ return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function kwest_core_theme(){
+ return array(
+  'kwest_core_scroll_help' => array(
+   'variables' => array(),
+   'file' => 'inc/kwest_core.theme.inc',
+  ),
+  'kwest_core_backlink' => array(
+   'variables' => array(),
+   'file' => 'inc/kwest_core.theme.inc',
+  ),
+ );
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function kwest_core_block_configure($delta = ''){
+ $form = array();
+ switch($delta){
+  case 'kwest_core_scroll_help':
+    $form['kwest_core_scroll_help'] = array(
+        '#type' => 'fieldset', 
+        '#title' => t('Settings'), 
+        '#collapsible' => TRUE, 
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+    );
+    $form['kwest_core_scroll_help']['scroll_down'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Text for Scroll Down'),
+        '#default_value' => variable_get('kwest_core_scroll_help_down', ''),
+    );
+    $form['kwest_core_scroll_help']['scroll_up'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Text for Scroll Up'),
+        '#default_value' => variable_get('kwest_core_scroll_help_up', ''),
+    ); 
+  break;
+  case 'kwest_core_backlink':
+    $form['kwest_core_backlink'] = array(
+        '#type' => 'fieldset', 
+        '#title' => t('Settings'), 
+        '#collapsible' => TRUE, 
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+    );
+    $form['kwest_core_backlink']['text'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Text for Link to Back'),
+        '#default_value' => variable_get('kwest_core_backlink_text', t('Back')),
+    ); 
+  break;
+ default:
+  break;
+ }
+ return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function kwest_core_block_save($delta = '', $edit = array()){
+  switch($delta){
+    case 'kwest_core_scroll_help':
+      if(!empty($edit['kwest_core_scroll_help'])){
+          variable_set('kwest_core_scroll_help_down', $edit['kwest_core_scroll_help']['scroll_down']);
+          variable_set('kwest_core_scroll_help_up', $edit['kwest_core_scroll_help']['scroll_up']);
+      }
+     break;
+    case 'kwest_core_backlink':
+      if(!empty($edit['kwest_core_backlink'])){
+        variable_set('kwest_core_backlink_text', $edit['kwest_core_backlink']['text']);
+      }
+     break;
+    default:
+     break;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+*/
+function kwest_core_form_alter(&$form, $form_state, $form_id){
+  $form['#attributes']['novalidate'] = 'novalidate';
+}

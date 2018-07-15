@@ -1,0 +1,46 @@
+{% extends '_page.html' %}
+{% import '_utils.html' as utils %}
+
+{% block page-content %}
+    <div class="background">
+        {{ utils.background() }}
+    </div>
+
+    <div class="page-column vertical-middle">
+        <div class="page-content dark-background">
+            <div class="grid clear bottom">
+                <div class="v320-1 v720-1-of-2 v960-2-of-5">
+                    <div class="container padding-big">
+                        <div class="wysiwyg">
+                            <h2>Welcome</h2>
+                            <hr class="short thick white">
+                            <p>Welcome to the K West Hotel & Spa in stylish West London. A stone’s throw from Westfield London and one of the best value 4-star hotels London has to offer. Whether you need a London meeting venue or a luxury escape, at the K West Hotel & Spa you’ll find great service without the stuffiness. View our Gift Vouchers or hotel Special Offers for our latest luxury hotel packages.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-thumbnails">
+        <div class="scrollbar-wrapper">
+            <div class="scrollbar-clip">
+                <div class="scrollbar-offset">
+                    <div class="scrollable shadow-right">
+                        <ul class="grid no-wrap">
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                            {{ utils.home_thumbnail() }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

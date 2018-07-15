@@ -1,0 +1,211 @@
+<?php
+function kwest_contact_permission() {
+    return array(
+        'manage contact settings' => array(
+            'title' => t('Manage contact settings'),
+        ),
+    );
+}
+
+
+function kwest_contact_menu() {
+    return array(
+        'admin/config/kwest/contact' => array(
+            'title' => 'Contact',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_contact_admin_form'),
+            'access arguments' => array('manage contact settings'),
+            'type' => MENU_NORMAL_ITEM,
+        ),
+        'contact' => array(
+            'title' => 'Contact',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('kwest_contact_contact_form'),
+            'access callback' => true,
+            'type' => MENU_CALLBACK,
+        ),
+        'contact/success' => array(
+            'title' => 'Message successfully sent',
+            'page callback' => 'theme',
+            'page arguments' => array('kwest_contact_success'),
+            'access callback' => true,
+            'type' => MENU_CALLBACK,
+        ),
+        'contact/error' => array(
+            'title' => 'Error sending message',
+            'page callback' => 'theme',
+            'page arguments' => array('kwest_contact_error'),
+            'access callback' => true,
+            'type' => MENU_CALLBACK,
+        )
+    );
+}
+
+
+function kwest_contact_admin_form() {
+    $text = variable_get('kwest_contact_text');
+    $form = array(
+        'kwest_contact_sender_email' => array(
+            '#title' => 'Sender email',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_contact_sender_email', ''),
+        ),
+        'kwest_contact_recipient_email' => array(
+            '#title' => 'Recipient email',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_contact_recipient_email', ''),
+        ),
+        'kwest_contact_text' => array(
+            '#type' => 'text_format',
+            '#title' => 'Text',
+            '#default_value' => isset($text['value']) ? $text['value'] : '',
+        ),
+        'kwest_contact_privacy_policy_url' => array(
+            '#title' => 'Privacy policy url',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#default_value' => variable_get('kwest_contact_privacy_policy_url', ''),
+        ),
+        'map' => array(
+            '#type' => 'fieldset',
+            '#title' => 'Map',
+            'kwest_contact_map_lat' => array(
+                '#type' => 'textfield',
+                '#title' => 'Latitude',
+                '#default_value' => variable_get('kwest_contact_map_lat'),
+            ),
+            'kwest_contact_map_lng' => array(
+                '#type' => 'textfield',
+                '#title' => 'Longitude',
+                '#default_value' => variable_get('kwest_contact_map_lng'),
+            ),
+            'kwest_contact_map_zoom' => array(
+                '#type' => 'textfield',
+                '#title' => 'Zoom',
+                '#default_value' => variable_get('kwest_contact_map_zoom'),
+            ),
+        ),
+    );
+    return system_settings_form($form);
+}
+
+
+function kwest_contact_theme() {
+    return array(
+        'kwest_contact_form' => array(
+            'render element' => 'form',
+            'template' => 'kwest-contact-form',
+        ),
+        'kwest_contact_success' => array(
+            'variables' => array(),
+            'template' => 'kwest-contact-success',
+        ),
+        'kwest_contact_error' => array(
+            'variables' => array(),
+            'template' => 'kwest-contact-error',
+        ),
+        'kwest_contact_mail' => array(
+            'variables' => array(),
+            'template' => 'kwest-contact-mail',
+        ),
+    );
+}
+
+
+function kwest_contact_contact_form() {
+    return array(
+        '#theme' => 'kwest_contact_form',
+        'first_name' => array(
+            '#title' => 'Name',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+        ),
+        'last_name' => array(
+            '#title' => 'Surname',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+        ),
+        'email' => array(
+            '#title' => 'Email',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#element_validate' => array('kwest_contact_email_element_validate'),
+        ),
+        'phone' => array(
+            '#title' => 'Phone',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+            '#element_validate' => array('element_validate_integer_positive'),
+        ),
+        'subject' => array(
+            '#title' => 'Topic',
+            '#title_display' => 'none',
+            '#type' => 'textfield',
+            '#required' => true,
+        ),
+        'message' => array(
+            '#title' => 'Message',
+            '#title_display' => 'none',
+            '#type' => 'textarea',
+            '#required' => true,
+            '#resizable' => false,
+        ),
+        'privacy_policy' => array(
+            '#title' => 'Privacy policy',
+            '#title_display' => 'none',
+            '#label' => 'I have read the privacy policy',
+            '#type' => 'checkbox',
+            '#required' => true,
+        ),
+        'marketing_exclude' => array(
+            '#title' => 'Marketing exclusion',
+            '#title_display' => 'none',
+            '#label' => 'Please exclude me from all follow up marketing',
+            '#type' => 'checkbox',
+        ),
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Send message'
+        )
+    );
+}
+
+function kwest_contact_email_element_validate($element, &$form_state, $form) {
+   if (!valid_email_address($element['#value'])) {
+     form_error($element, t('Please enter a valid email address.'));
+   }
+}
+
+function kwest_contact_mail($key, &$message, $params){
+    if ($key == 'contact') {
+        $message['subject'] = 'Contact message';
+        $message['body'][] = theme('kwest_contact_mail', $params);
+    }
+}
+
+
+function kwest_contact_mail_send($params) {
+    $recipient = variable_get('kwest_contact_recipient_email', '');
+    if (!$recipient)
+        return false;
+
+    $from = variable_get('kwest_contact_sender_email', variable_get('site_mail', 'admin@example.com'));
+
+    $result = drupal_mail('kwest_contact', 'contact', $recipient, language_default(), $params, $from, true);
+    return $result['result'];
+}
+
+
+function kwest_contact_contact_form_submit($form, &$form_state) {
+    $success = kwest_contact_mail_send($form_state['values']);
+    if ($success)
+        $form_state['redirect'] = 'contact/success';
+    else
+        $form_state['redirect'] = 'contact/error';
+}

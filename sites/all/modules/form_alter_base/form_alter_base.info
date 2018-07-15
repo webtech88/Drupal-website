@@ -1,0 +1,7 @@
+name = Form Alter Base
+description = Provides a base class for form alters
+core = 7.x
+package = Merix
+version = "7.x-1.0"
+
+dependencies[] = pathauto

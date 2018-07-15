@@ -1,0 +1,5 @@
+name = "Tests helper module"
+description = "Helper pages for website testing."
+package = "APP"
+core = 7.x
+project = testshelper

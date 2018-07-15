@@ -1,0 +1,94 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_macros_blog.html' as blog %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Rooms{% endblock %}
+
+
+{% block content %}
+    <div class="wysiwyg">
+        <h2>Deluxe room <span class="subtitle">27 sq m / 290 sq ft - £260/day</span></h2>
+        <hr class="short thick">
+        <p>Choose a Deluxe room and enjoy King or twin beds, great space and stylish décor, plus all the features of a Superior room. Additionally a sofa seating area and ample luggage storage and cosy dressing gowns, mean you’ll have all the comforts of home.</p>
+        <div class="clip margin-top">
+            <div class="grid padding">
+                <div class="v320-1 v480-1-of-2">
+                    <ul>
+                        <li>Comfortable beds</li>
+                        <li>Flat-screen TV</li>
+                        <li>Air conditioning</li>
+                        <li>Safe, Hair-dryer &amp; Ironing facilities</li>
+                        <li>Tea &amp; Coffee</li>
+                    </ul>
+                </div>
+                <div class="v320-1 v480-1-of-2">
+                    <ul>
+                        <li>Works desk</li>
+                        <li>Customized mini bar (Chargeable)</li>
+                        <li>In room internet facilities (Chargeable)</li>
+                        <li>LLK London grooming products</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery-content %}
+    {{ utils.gallery() }}
+{% endblock %}
+
+{% block sub-content %}
+<div class="container padding-big">
+    <div class="wysiwyg">
+
+        <div class="clip">
+            <div class="grid padding">
+                <div>
+                    <p>
+                        <a href="#" class="button icon-right icon-arrow-right">Book now</a>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <a href="#" class="button alt-background icon-right icon-arrow-right">Booking policy</a>
+                    </p>
+                </div>
+            </div>
+            <div class="grid padding">
+                <div>
+                    <p>
+                        <a href="#" class="button icon-right icon-arrow-right">BOOK A SUPERIOR TWIN</a>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <a href="#" class="button icon-right icon-arrow-right">BOOK A SUPERIOR DOUBLE</a>
+                    </p>
+                </div>
+            </div>
+            <div class="grid sizing-options">
+                <div class="v320-1 v480-1 v720-1-of-2">
+                    <a href="#" class="downsize-me sizing-option" style="background-image: url(http://lorempixel.com/198/198/city?asd=0.8085142183117568)">
+                        <h3>Junior double</h3>
+                        <div class="button icon-left icon-arrow-left">DOWNSIZE ME</div>
+                    </a>
+                </div>
+                <div class="v320-1 v480-1 v720-1-of-2">
+                    <a href="#" class="upsize-me sizing-option" style="background-image: url(http://lorempixel.com/198/198/city?asd=0.7700398901943117)">
+                        <h3>Deluxe room</h3>
+                        <div class="button icon-right icon-arrow-right">UPSIZE ME</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    {{ utils.enjoy() }}
+{% endblock %}

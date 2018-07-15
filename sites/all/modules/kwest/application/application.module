@@ -1,0 +1,28 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+include_once 'application.features.inc';
+
+/**
+ * Implements hook_init().
+ */
+function application_init() {
+  drupal_add_js('https://bda.bookatable.com/deploy/lbui.direct.min.js', 'external');
+}
+
+
+/**
+ * List of all features.
+ */
+function application_features_list() {
+  $features = array(
+    'application',
+    'siteblog',
+    'rooms',
+  );
+
+  return $features;
+}

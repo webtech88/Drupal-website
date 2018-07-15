@@ -1,0 +1,29 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function metatag_path_schema() {
+	return array(
+		'metatag_path_paths' => array(
+			'description' => 'Storage of meta tag paths configuration.',
+			'fields' => array(
+				'pid' => array(
+					'type' => 'serial',
+					'unsigned' => true,
+					'not null' => true,
+				),
+				'path' => array(
+					'type' => 'varchar',
+					'length' => 255,
+					'not null' => TRUE,
+					'default' => '',
+					'description' => 'The path.',
+				),
+			),
+			'primary key' => array('pid'),
+			'unique keys' => array(
+				'path' => array('path'),
+			),
+		),
+	);
+}

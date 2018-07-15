@@ -1,0 +1,33 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_macros_blog.html' as blog %}
+{% import '_utils.html' as utils %}
+
+{% block header %}Blog<br>&amp; News{% endblock %}
+
+{% block page-content-classes %}{% endblock %}
+
+{% block content %}
+    {{ blog.teaser(true, true) }}
+    {{ blog.teaser(false, true) }}
+    {{ blog.teaser(true, true) }}
+    {{ blog.teaser(false, true) }}
+    <p>
+        <a href="#" class="button icon-arrow-right icon-right">Load more</a>
+    </p>
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid">
+        {{ utils.testimonial_intro() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+    </div>
+{% endblock %}
+
+{% block sidebar-image %}
+    {{ utils.sidebar_image() }}
+{% endblock %}

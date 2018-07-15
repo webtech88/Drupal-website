@@ -1,0 +1,57 @@
+<?php
+
+
+function popup_block_info() {
+  $blocks = array();
+
+  $blocks['popup_block'] = array(
+    'info' => t('Popup block'),
+  );
+  return $blocks;
+}
+/**
+* Implements hook_block_view().
+*/
+function popup_block_view($delta = '', $data=NULL) {
+  $block = array();
+  switch ($delta) {
+    case 'popup_block':
+      $block['subject'] = '';
+      $block['content'] = popup_block();
+      break;
+  }
+  return $block;
+}
+
+function popup_block() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+		->entityCondition('bundle', 'popup')
+  	  	->propertyCondition('status', 1)
+		->propertyOrderBy('created', 'DESC')
+		->range(0,1);
+  
+  if(arg(0) == 'node'){
+     $query->fieldCondition('field_pages', 'target_id', array(arg(1)), '=');
+  }else if(drupal_is_front_page()){
+     $query->fieldCondition('field_display_on_home_page', 'value', true, '=');
+  }
+
+  $e = $query->execute();
+  $popup = NULL;
+  if(isset($e['node'])){
+  	$popup = node_load_multiple(array_keys($e['node']));
+  }
+  
+  return theme("popup", array('popup' => $popup));
+}
+
+
+function popup_theme($existing, $type, $theme, $path) {
+  return array(
+      'popup' => array(
+        'template' => 'popup',
+      	'variables' => array('popup' => NULL),
+	  ),
+	);
+}

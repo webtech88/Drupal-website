@@ -1,0 +1,50 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_utils.html' as utils %}
+
+{% block header %}K-Spa{% endblock %}
+
+{% block content %}
+    <div class="clip">
+        <div class="grid padding big">
+            <div class="v320-1">
+                <h2>About K-Spa</h2>
+                <hr class="short thick">
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacinia velit massa, vel rutrum lectus gravida a. In hac habitasse platea dictumst. Nunc vulputate sit amet nisl at condimentum. Phasellus ac mi leo. Morbi ac mauris tristique, ornare augue a, convallis magna. Proin luctus magna quis nunc ultricies dictum. Ut pretium ac purus id mattis. Duis vel congue lectus. Suspendisse sodales elementum interdum. Nam dolor metus, vehicula a laoreet vitae, tempus sit amet tortor. Vivamus cursus, lorem vitae accumsan suscipit, nisi ipsum auctor nulla, sed bibendum ante risus eget enim.</p>
+            </div>
+            <div class="v320-1 v480-1-of-2">
+                <h3>Spa use for hotel guests</h3>
+                <hr class="short">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacinia velit massa, vel rutrum lectus gravida a. In hac habitasse platea dictumst. Nunc vulputate sit amet nisl at condimentum. Phasellus ac mi leo. Morbi ac mauris tristique, ornare augue a, convallis magna. Proin luctus magna quis nunc ultricies dictum. Ut pretium ac purus id mattis. Duis vel congue lectus. Suspendisse sodales elementum interdum. Nam dolor metus, vehicula a laoreet vitae, tempus sit amet tortor. Vivamus cursus, lorem vitae accumsan suscipit, nisi ipsum auctor nulla, sed bibendum ante risus eget enim.</p>
+            </div>
+            <div class="v320-1 v480-1-of-2">
+                <h3>Spa use for external guests</h3>
+                <hr class="short">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacinia velit massa, vel rutrum lectus gravida a. In hac habitasse platea dictumst. Nunc vulputate sit amet nisl at condimentum. Phasellus ac mi leo. Morbi ac mauris tristique, ornare augue a, convallis magna. Proin luctus magna quis nunc ultricies dictum. Ut pretium ac purus id mattis. Duis vel congue lectus. Suspendisse sodales elementum interdum. Nam dolor metus, vehicula a laoreet vitae, tempus sit amet tortor. Vivamus cursus, lorem vitae accumsan suscipit, nisi ipsum auctor nulla, sed bibendum ante risus eget enim.</p>
+            </div>
+            <div class="v320-1">
+                <p>
+                    <a href="#" class="button icon-arrow-right icon-right">Check out treatments</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery-content %}
+    {{ utils.gallery('K-spa<br>Gallery') }}
+{% endblock %}
+
+{% block gallery2 %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid">
+        <div class="v320-1">
+            {% include '_opening_hours.html' %}
+        </div>
+        {{ utils.testimonial_intro() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+        {{ utils.testimonial_item() }}
+    </div>
+{% endblock %}

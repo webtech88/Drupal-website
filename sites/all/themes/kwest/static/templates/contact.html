@@ -1,0 +1,112 @@
+{% extends '_page_with_sidebar.html' %}
+{% import '_utils.html' as utils %}
+{% import '_forms.html' as forms %}
+
+{% block header %}Contact{% endblock %}
+
+{% block background %}
+    <div class="background">
+        <figure>
+            <img src="images/map.jpg" width="1080" height="1080" alt="">
+            <div class="map" data-zoom="12" data-lat="-34.397" data-lng="150.644" data-marker="images/marker.png">Map</div>
+        </figure>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="wysiwyg">
+        <h2>Contact &amp; location</h2>
+        <hr class="short thick">
+        <p>Please fill in the form below to send us your enquiry.</p>
+    </div>
+    <form class="margin-top">
+        <div class="grid padding">
+            <div class="v320-1 v480-1-of-2">
+                {{ forms.textfield_table('name', 'Name:') }}
+            </div>
+            <div class="v320-1 v480-1-of-2">
+                {{ forms.textfield_table('suname', 'Surname:') }}
+            </div>
+            <div class="v320-1 v480-1-of-2">
+                {{ forms.textfield_table('email', 'Email:') }}
+            </div>
+            <div class="v320-1 v480-1-of-2">
+                {{ forms.textfield_table('phone', 'Phone:') }}
+            </div>
+            <div class="v320-1">
+                {{ forms.textfield_table('topic', 'Topic:') }}
+            </div>
+            <div class="v320-1">
+                {{ forms.textarea('message', 'Message:') }}
+            </div>
+            <div class="v320-1">
+                {{ forms.checkbox('privacy_policy', 'I have read the privacy policy') }}
+            </div>
+            <div class="v320-1">
+                {{ forms.checkbox('marketing_exclude', 'Please exclude me from all follow up marketing') }}
+            </div>
+            <div class="v320-1 text-right">
+                <button type="submit" class="button icon-right icon-arrow-right">Send Message</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block gallery-content %}
+    <div class="grid rtl middle">
+        <div class="v320-hide v480-hide v720-1-of-4 v1280-1-of-5">
+            {{ utils.thumbnail(198, 198, 'sidebar-image triangle-color-inverted') }}
+        </div>
+        <div class="v320-1 v1280-4-of-5">
+            <div class="grid middle">
+                <div class="v320-1 v720-1-of-2">
+                    <div class="grid middle">
+                        <div class="v320-1 v480-1-of-2">
+                            {{ utils.thumbnail(198, 198, 'tile-image-left triangle-color-inverted') }}
+                        </div>
+                        <div class="v320-1 v480-1-of-2 text-center">
+                            <div class="tile container inverted">
+                                <div>
+                                    <h3 class="icon-block icon-map">Getting there</h3>
+                                    <p>Donec et blandit leo, nam semper tellus.  Accumsan laoreet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="v320-1 v720-1-of-2">
+                    <div class="grid middle v480-rtl">
+                        <div class="v320-1 v480-1-of-2">
+                            {{ utils.thumbnail(198, 198, 'tile-image-left triangle-color-inverted') }}
+                        </div>
+                        <div class="v320-1 v480-1-of-2 text-center">
+                            <div class="tile container inverted">
+                                <div>
+                                    <h3 class="icon-block icon-plane">Directions from airports</h3>
+                                    <p>Donec et blandit leo, nam semper tellus.  Accumsan laoreet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block gallery %}{% endblock %}
+
+{% block sidebar-content %}
+    <div class="grid sidebar-contact-box">
+        <div class="v320-1">
+            <h3 class="icon-block icon-location">K&nbsp;West<br>Hotel &amp; Spa</h3>
+            <p>
+                Richmond Way,<br>
+                London W14 0AX<br>
+                Email: <a href="mailto:bookit@k-west.co.uk">bookit@k-west.co.uk</a><br>
+                Tel: <a href="tel:+4402080086600">+44(0)20 8008 6600</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

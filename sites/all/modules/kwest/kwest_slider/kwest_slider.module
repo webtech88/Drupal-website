@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function kwest_slider_block_info() {
+ $blocks = array();
+ $vocabularuty = taxonomy_vocabulary_get_names();
+ if(!empty($vocabularuty['vocab_kwesy_slider'])){
+  $placement_vid = $vocabularuty['vocab_kwesy_slider']->vid;
+  $placement = taxonomy_get_tree($placement_vid);
+  foreach($placement as $placement_term){
+   $blocks['kwest_slider_' .$placement_term->tid] = array(
+	 'info' => t('Slider'). ': ' .$placement_term->name,
+	 'cache' => DRUPAL_CACHE_PER_ROLE,
+   );
+  }
+ }
+ return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function kwest_slider_block_view($delta = '') {
+ $block = array();
+ if(preg_match('/kwest_slider/', $delta)){
+  module_load_include('inc', 'kwest_slider', 'inc/kwest_slider.blocks');
+  $block_id = str_replace('kwest_slider_', '', $delta);
+  $block['subject'] = '';
+  $block['content'] = _kwest_slider($block_id);
+ }
+ return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function kwest_slider_block_configure($delta = ''){
+    $form = array();
+    if(preg_match('/kwest_slider/', $delta)){
+        $block_id = str_replace('kwest_slider_', '', $delta);
+        $form['kwest_slider_settings'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Settings for slider'),
+            '#collapsible' => TRUE, 
+            '#collapsed' => FALSE,
+            '#tree' => TRUE,
+        );
+        $form['kwest_slider_settings']['autoplay'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Slider Autoplay'),
+            '#default_value' => variable_get('kwest_slider_autoplay_' .$block_id, 0),
+        );
+        $form['kwest_slider_settings']['autoplay_timeout'] = array(
+            '#type' => 'textfield',
+            '#element_validate' => array('kwest_slider_timeout_integer_validate'),
+            '#title' => t('Slider Autoplay Timeout (in milliseconds)'),
+            '#default_value' => variable_get('kwest_slider_autoplay_timeout_' .$block_id, ''),
+        );
+        $form['kwest_slider_settings']['wrap_class'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Wrapper for block'),
+            '#default_value' => variable_get('kwest_slider_wrap_class_' .$block_id, ''),
+        );
+    }
+    return $form;
+}
+
+/**
+ * Custom function to check timeout
+ */
+function kwest_slider_timeout_integer_validate($element, &$form_state) {
+  $value = $element['#value'];
+  if(!empty($value) && !is_numeric($value) || (is_numeric($value) && $value <= 2000)){
+    form_error($element, t('Please provide an integer value for "Slider Autoplay Timeout" bigger then 2000ms.'));
+  }
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function kwest_slider_block_save($delta = '', $edit = array()){
+    if(preg_match('/kwest_slider/', $delta)){
+        $block_id = str_replace('kwest_slider_', '', $delta);
+        variable_set('kwest_slider_autoplay_' .$block_id, $edit['kwest_slider_settings']['autoplay']);
+        variable_set('kwest_slider_autoplay_timeout_' .$block_id, $edit['kwest_slider_settings']['autoplay_timeout']);
+        variable_set('kwest_slider_wrap_class_' .$block_id, $edit['kwest_slider_settings']['wrap_class']);
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function kwest_slider_theme(){
+  return array(
+      'kwest_slider' => array(
+          'variables' => array(),
+          'file' => 'inc/kwest_slider.theme.inc',
+      ),
+      'kwest_slider_background' => array(
+          'variables' => array(),
+          'template' => 'templates/kwest-slider-background',
+      ),
+  );
+}

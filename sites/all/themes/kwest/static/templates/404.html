@@ -1,0 +1,39 @@
+{% extends '_page.html' %}
+{% import '_utils.html' as utils %}
+
+{% block page-content %}
+    <div class="background">
+        {{ utils.background() }}
+    </div>
+
+    <div class="page-column vertical-middle">
+        <div class="page-content no-background">
+            <div class="grid clear bottom">
+                <div class="v320-1 v960-2-of-3">
+                    <div class="container padding-big">
+                        <div class="wysiwyg">
+                            <h2>Page not found...</h2>
+                            <hr class="short thick white">
+                            <p>The page you requested was not found, and we have a fine guess why.</p>
+                            <ul>
+                                <li>If you typed the URL directly, please make sure the spelling is correct.</li>
+                                <li>If you clicked on a link to get here, the link is outdated.</li>
+                            </ul>
+                            <h3>What can you do?</h3>
+                            <hr class="short white">
+                            <p>Have no fear, help is near! There are many ways you can get back on track:</p>
+                            <ul>
+                                <li>Go back to the previous page.</li>
+                                <li>Use the book now bar at the top of the page to book your room.</li>
+                                <li>Follow these links to get you back on track!</li>
+                            </ul>
+                            <p>
+                                <a href="#" class="button alt-text-color icon-arrow-right icon-right">K-West Home</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
